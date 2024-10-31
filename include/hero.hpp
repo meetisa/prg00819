@@ -4,23 +4,19 @@
 #include <iostream>
 #include "tetramini.hpp"
 
+#define FRLEN 8
+
 class Hero: public Tetramino {
 	protected:
-		char frames[2][17] = {
-			"0100010001000100",
-			"0000111100000000"
+		long int frames[FRLEN] = {
+			4369, 8738, 17476, 34952,
+			15, 240, 3840, 61440
 		};
-		int current=1;
-
+		int current=0;
 	public:
 		Hero();
 		void print();
-		void rotate() {
-			werase(base);
-			wrefresh(base);
-			current = current ? 0 : 1;
-			print();
-		}
+		void rotate();
 };
 
 #endif

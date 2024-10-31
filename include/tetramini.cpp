@@ -8,22 +8,33 @@ Tetramino::Tetramino(int w, int h) {
 	base = newwin(HEIGHT, WIDTH, y, x);
 }
 
-void Tetramino::print(char *shape) {
-	for(int i=0; i<HEIGHT; i++)
-		for(int j=0; j<WIDTH; j++)
-			if(shape[(i*WIDTH)+j] == '1')
-				mvwprintw(base, i, j*2, "[]");
+void Tetramino::print(int shape) {
+	/*
+	for(int i=0; i<WIDTH*HEIGHT; i++)
+		if(shape[i] == '1')
+			mvwprintw(base, i/HEIGHT, (i%HEIGHT)*2, "[]");
+	*/
 
+	int c=0;
+	for(int i=shape; i!=0; i/=2) {
+		if(i % 2)
+			mvwprintw(base, c/HEIGHT, (c%HEIGHT)*2, "[]");
+		c++;
+	}
 	wrefresh(base);
+	//update();
 }
 
 void Tetramino::move(int dir) {
 	x += dir;
-	werase(base);
-	wrefresh(base);
 	mvwin(base, y, x);
+	wrefresh(base);
 }
 
-void Tetramino::rotate(int dir) {
-
+void Tetramino::gravity() {
+	y += 1;
+	mvwin(base, y, x);
+	wrefresh(base);
 }
+
+
