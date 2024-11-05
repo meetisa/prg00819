@@ -10,6 +10,8 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
+	srand(time(NULL));
+
 	//initialization functions
 	initscr();
 	start_color();

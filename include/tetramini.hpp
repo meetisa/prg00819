@@ -21,23 +21,11 @@ class Tetramino {
 		void print(int shape);
 		void move(int dir);
 		void gravity();
-		void getcoords(int *wx, int *wy) {
-			*wx = x;
-			*wy = y;
-		}
+		void getcoords(int *wx, int *wy);
+		void getclout(int row, char *buffer);
+		bool check_collision();
 
-		void getclout() {
-			char buffer[WIDTH+1];
-			for(int i=0; i<WIDTH+1; i++)
-				buffer[i] = mvinch(3, i) & A_CHARTEXT;
-			buffer[WIDTH] = '\0';
-
-			mvprintw(LINES/2, 5, "%s", buffer);
-		}
-
-		int check() {
-			return y;
-		}
+		void del();
 };
 
 #endif
