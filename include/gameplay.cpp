@@ -34,17 +34,13 @@ void gameplay() {
 		t.getcoords(&wx, &wy);
 
 		t.print();
-		mvprintw(1, 0, "%d\t%d", wx, wy);
-		//t.getclout(3, 9);
-		//t.getclout(wy+4, 10);
-
 
 		if(++tm % CLOCK == 0) {
 			if(!t.check_collision() && wy < LINES-5)
 				t.gravity();
 			else {
 				g.suckup(t);
-				//t.del();
+				t.del();
 			}
 			t.print();
 			tm=0;
@@ -63,7 +59,7 @@ void gameplay() {
 				t.rotate();
 				break;
 			case KEY_LEFT:
-				if(wx > 1)
+				if(wx >= 0)
 					t.move(-2);
 				updatescr(scr);
 				break;

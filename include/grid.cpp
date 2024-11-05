@@ -1,7 +1,7 @@
 #include "grid.hpp"
 
 Grid::Grid(int w, int h) {
-	width = (w-1)/2;
+	width = (w/2)-1;
 	height = h-2;
 	len = width*height;
 	grid = new int[len];
@@ -10,7 +10,7 @@ Grid::Grid(int w, int h) {
 }
 
 int Grid::coords_to_pos(int x, int y) {
-	return (y*width) + x;
+	return ((y-1)*width) + x;
 }
 
 void Grid::pos_to_coords(int pos, int *x, int *y) {
@@ -20,11 +20,12 @@ void Grid::pos_to_coords(int pos, int *x, int *y) {
 
 void Grid::draw() {
 	int x, y;
-
+	int c=0;
 	for(int i=0; i<len; i++) {
-		pos_to_coords(i, &x, &y);
-		if(grid[i])
+		if(grid[i]) {
+			pos_to_coords(i, &x, &y);
 			mvprintw(y+1, (x*2)+1, "[]");
+		}
 	}
 }
 
@@ -35,10 +36,9 @@ void Grid::suckup(Hero t) {
 	char b[8];
 	for(int i=0; i<4; i++) {
 		t.getclout(i, b);
-		mvprintw(36+i, 41, "%s", b);
-		for(int j=0; j<8; j++) {
-			mvprintw(0, 0, "%d\t%d", x, y);
+		for(int j=0; j<8; j=j+2) {
 			if(b[j] == '[') {
+				t.getcoords(&x, &y);
 				int p = coords_to_pos((x+j)/2, y+i);
 				grid[p] = 1;
 			}

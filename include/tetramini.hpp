@@ -8,7 +8,7 @@ class Tetramino {
 		int WIDTH;
 		int HEIGHT;
 
-		int x=2;
+		int x=1;
 		int y=2;
 
 		WINDOW *base;
