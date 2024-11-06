@@ -1,9 +1,11 @@
 #include <iostream>
 #include "tetramini.hpp"
 
-Tetramino::Tetramino(int w, int h) {
+Tetramino::Tetramino(World world, int w, int h) {
 	WIDTH = w*2;
 	HEIGHT = h;
+
+	world.getspecs(&SCRW, &SCRH, &XOFF);
 
 	base = newwin(HEIGHT, WIDTH, y, x);
 }
@@ -15,14 +17,12 @@ void Tetramino::print(int shape) {
 			mvwprintw(base, i/HEIGHT, (i%HEIGHT)*2, "[]");
 	*/
 
-	int c=0;
-	for(int i=shape; i!=0; i/=2) {
+	int i, c=0;
+	for(i=shape; i!=0; i/=2, c++) {
 		if(i % 2)
 			mvwprintw(base, c/HEIGHT, (c%HEIGHT)*2, "[]");
-		c++;
 	}
 	wrefresh(base);
-	//update();
 }
 
 void Tetramino::move(int dir) {
@@ -31,10 +31,15 @@ void Tetramino::move(int dir) {
 	wrefresh(base);
 }
 
-void Tetramino::gravity() {
-	y += 1;
-	mvwin(base, y, x);
-	wrefresh(base);
+int Tetramino::falling() {
+	if(!check_collision() && y < SCRH - (HEIGHT+1)) {
+		y += 1;
+		mvwin(base, y, x);
+		wrefresh(base);
+		return 1;
+	}
+	else
+		return 0;
 }
 
 void Tetramino::getcoords(int *wx, int *wy) {
@@ -42,22 +47,30 @@ void Tetramino::getcoords(int *wx, int *wy) {
 	*wy = y;
 }
 
-bool Tetramino::check_collision() {
+int Tetramino::check_collision() {
 	int x, y;
 	getcoords(&x, &y);
 
 	char b[WIDTH+1];
-	getclout(HEIGHT-1,b);
+	getclout(HEIGHT-1, b);
 
-	const int len=40;
-	char row_1[WIDTH];
-	for(int i=0; i<WIDTH; i++)
-		row_1[i] = mvinch(y+HEIGHT, x+i) & A_CHARTEXT;
-	row_1[WIDTH-1] = '\0';
+	int coll = 0;
+	char ch;
+	for(int i=0; i<WIDTH; i++) {
+		ch = mvinch(y+HEIGHT, x+i) & A_CHARTEXT;
+		if(b[i] == '[' && ch == '[') {
+			coll = 1;
+			break;
+		}
+	}
 
-	for(int i=0; i<WIDTH; i=i+2)
-		if(b[i] == '[')
-			return row_1[i] == '[';
+	return coll;
+}
+
+
+void Tetramino::getspecs(int *width, int *height) {
+	*width = WIDTH;
+	*height = HEIGHT;
 }
 
 void Tetramino::getclout(int row, char *buffer) {
@@ -67,6 +80,6 @@ void Tetramino::getclout(int row, char *buffer) {
 }
 
 void Tetramino::del() {
-	x = 3;
-	y = 2;
+	x = STARTX;
+	y = STARTY;
 }

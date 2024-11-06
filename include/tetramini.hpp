@@ -2,29 +2,37 @@
 #define TETRAMINI_HPP
 
 #include <ncurses.h>
+#include "world.hpp"
 
 class Tetramino {
 	protected:
+		int SCRW;
+		int SCRH;
+		int XOFF;
+
 		int WIDTH;
 		int HEIGHT;
 
-		int x=1;
-		int y=2;
+		int STARTX = 5;
+		int STARTY = 2;
+
+		int x = STARTX;
+		int y = STARTY;
 
 		WINDOW *base;
-		WINDOW *org = new WINDOW;
 	public:
+		//constructor
+		Tetramino(World world, int w, int h);
 
-		Tetramino(int w, int h);
-
-		void update();
 		void print(int shape);
-		void move(int dir);
-		void gravity();
-		void getcoords(int *wx, int *wy);
-		void getclout(int row, char *buffer);
-		bool check_collision();
 
+		void move(int dir);
+		int falling();
+
+		void getcoords(int *wx, int *wy);
+		void getspecs(int *width, int *height);
+		void getclout(int row, char *buffer);
+		int check_collision();
 		void del();
 };
 
