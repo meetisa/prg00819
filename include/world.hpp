@@ -3,6 +3,11 @@
 
 #include <ncurses.h>
 
+typedef struct node {
+	node *next;
+	int val;
+} block;
+
 class World {
 	private:
 		int SCRW;
@@ -14,7 +19,8 @@ class World {
 		int GRIDH;
 		int LEN;
 
-		int *grid;
+		block *grid = NULL;
+		//int *grid;
 
 	public:
 		World(int w, int h, int xoff);
@@ -27,6 +33,7 @@ class World {
 		void update_screen();
 
 		//void suckup(Hero t);
+		void decompose_block(int x, int y);
 
 		void checkfullrow();
 };

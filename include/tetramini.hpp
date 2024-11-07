@@ -6,6 +6,7 @@
 
 class Tetramino {
 	protected:
+		World *WORLD;
 		int SCRW;
 		int SCRH;
 		int XOFF;
@@ -28,6 +29,7 @@ class Tetramino {
 
 		void move(int dir);
 		int falling();
+		void dies();
 
 		void getcoords(int *wx, int *wy);
 		void getspecs(int *width, int *height);

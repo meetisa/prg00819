@@ -5,7 +5,8 @@ Tetramino::Tetramino(World world, int w, int h) {
 	WIDTH = w*2;
 	HEIGHT = h;
 
-	world.getspecs(&SCRW, &SCRH, &XOFF);
+	WORLD = &world;
+	WORLD->getspecs(&SCRW, &SCRH, &XOFF);
 
 	base = newwin(HEIGHT, WIDTH, y, x);
 }
@@ -40,6 +41,21 @@ int Tetramino::falling() {
 	}
 	else
 		return 0;
+}
+
+void Tetramino::dies() {
+	/*
+	char b[WIDTH];
+	int i, j, pos;
+	for(i=0; i<HEIGHT; i++) {
+		getclout(i, b);
+		for(j=0; j<WIDTH; j=j+2) {
+			if(b[j] == '[') {
+				//WORLD->decompose_block((x+j)/2, y+i);
+			}
+		}
+	}
+	*/
 }
 
 void Tetramino::getcoords(int *wx, int *wy) {

@@ -1,5 +1,6 @@
 #include "world.hpp"
 
+
 World::World(int w, int h, int xoff) {
 	SCRW = w;
 	SCRH = h;
@@ -10,9 +11,11 @@ World::World(int w, int h, int xoff) {
 	GRIDH = SCRH-2;
 
 	LEN = GRIDW * GRIDH;
+	/*
 	grid = new int[LEN];
 	for(int i=0; i<LEN; i++)
 		grid[i] = 0;
+	*/
 }
 
 void World::getspecs(int *w, int *h, int *xoff) {
@@ -31,6 +34,16 @@ void World::pos_to_coords(int pos, int *x, int *y) {
 }
 
 void World::draw() {
+	block *iter;
+	int pos=LEN, x, y;
+	for(iter=grid; iter!=NULL; iter=iter->next, pos--) {
+		if(iter->val) {
+			pos_to_coords(pos, &x, &y);
+			mvprintw(y+1, (x*2)+1, "[]");
+		}
+	}
+
+	/*
 	int x, y;
 	int c=0;
 	for(int i=0; i<LEN; i++) {
@@ -39,12 +52,20 @@ void World::draw() {
 			//2+ è l'offset del mondo
 			mvprintw(y+1, (x*2)+1, "[]");
 	}
+	*/
 }
 
 void World::update_screen() {
 	wborder(screen, '|', '|', '#', '#', '+', '+', '+', '+');
 	wrefresh(screen);
 }
+
+
+void World::decompose_block(int x, int y) {
+	int pos = coords_to_pos(x, y);
+	grid[pos] = 1;
+}
+
 
 /*
 void World::suckup(Hero t) {
@@ -62,6 +83,7 @@ void World::suckup(Hero t) {
 			}
 		}
 	}
+
 	/*
 	char b;
 	for(int r=height; r>0; r--) {
@@ -84,6 +106,7 @@ void World::suckup(Hero t) {
 }
 */
 
+/*
 void World::checkfullrow() {
 	int bl;
 	for(int r=GRIDH; r>0; r--) {
@@ -122,3 +145,4 @@ void World::checkfullrow() {
 		mvprintw(r, 43, "%d", bl);
 	}
 }
+*/

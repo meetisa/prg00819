@@ -39,7 +39,8 @@ void gameplay() {
 
 			if(!t.falling()) {
 				//world.suckup(t);
-				world.checkfullrow();
+				t.dies();
+				//world.checkfullrow();
 				t.del();
 			}
 			tm=0;
