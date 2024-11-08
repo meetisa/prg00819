@@ -7,15 +7,18 @@ World::World(int w, int h, int xoff) {
 	XOFF = xoff;
 	screen = newwin(SCRH, SCRW, 0, XOFF);
 
-	GRIDW = (SCRW/2)-1;
-	GRIDH = SCRH-2;
+	GRIDW = (SCRW/2) - 1;
+	GRIDH = SCRH - 2;
 
 	LEN = GRIDW * GRIDH;
-	/*
-	grid = new int[LEN];
-	for(int i=0; i<LEN; i++)
-		grid[i] = 0;
-	*/
+	GRID_XOFF += XOFF;
+
+	grid = new block;
+	grid->val = 0;
+	grid->start_row = 1;
+	grid->row_blocks = 0;
+	grid->next = NULL;
+	grid->prev = NULL;
 }
 
 void World::getspecs(int *w, int *h, int *xoff) {
@@ -24,125 +27,96 @@ void World::getspecs(int *w, int *h, int *xoff) {
 	*xoff = XOFF;
 }
 
+/*
 int World::coords_to_pos(int x, int y) {
-	return ((y-1)*GRIDW) + x;
+	return (y-GRID_YOFF)*GRIDW + (x-GRID_XOFF)/2;
 }
+*/
 
 void World::pos_to_coords(int pos, int *x, int *y) {
-	*x = pos % GRIDW;
-	*y = pos / GRIDW;
+	*x = ((pos % GRIDW) * 2) + GRID_XOFF;
+	*y = (pos / GRIDW) + GRID_YOFF;
 }
 
 void World::draw() {
 	block *iter;
 	int pos=LEN, x, y;
-	for(iter=grid; iter!=NULL; iter=iter->next, pos--) {
-		if(iter->val) {
-			pos_to_coords(pos, &x, &y);
-			mvprintw(y+1, (x*2)+1, "[]");
-		}
+	for(iter=grid; iter!=NULL; iter=iter->next) {
+		pos_to_coords(pos, &x, &y);
+		if(iter->val)
+			mvprintw(y, x, "[]");
+		pos--;
 	}
+}
 
-	/*
-	int x, y;
-	int c=0;
-	for(int i=0; i<LEN; i++) {
-		pos_to_coords(i, &x, &y);
-		if(grid[i])
-			//2+ è l'offset del mondo
-			mvprintw(y+1, (x*2)+1, "[]");
+void World::scan() {
+	char ch;
+	int pos, x, y, prev_y=GRIDH;
+	int emptyrow = 0;
+	int fullrow = 0;
+	int row = GRIDH;
+	int *count;
+	*count = grid->row_blocks;
+	block *iter;
+	iter=grid;
+	for(pos=LEN; pos>0; pos--) {
+		pos_to_coords(pos, &x, &y);
+
+		if(iter->start_row) {
+		//if(prev_y != y) {
+			//mvprintw(prev_y, 50, "%d", fullrow);
+			if(fullrow==GRIDW) {
+				//mvprintw(2, 50, "fullrow %d", prev_y);
+				block *iter2;
+				iter2 = iter;
+				int i;
+				while(fullrow > 0 && iter2!=NULL) {
+					iter2 = iter2->prev;
+					fullrow--;
+				}
+				iter2->next = iter;
+			}
+			fullrow=0;
+		}
+
+		ch = mvinch(y, x) & A_CHARTEXT;
+
+		if(ch == '[') {
+			iter->val=1;
+			emptyrow=0;
+			fullrow++;
+			*count++;
+		}
+		else {
+			iter->val=0;
+			emptyrow++;
+		}
+
+		if(iter->next==NULL) {
+			iter->next = new block;
+			iter->next->next = NULL;
+			iter->next->prev = iter;
+			iter->start_row = (pos%GRIDW == 0);
+			iter->row_blocks = 0;
+		}
+		if(iter->start_row) {
+			*count = iter->row_blocks;
+			mvprintw(row--, 50, "%d", *count);
+		}
+		iter = iter->next;
+
+		prev_y = y;
+
+		if(emptyrow > GRIDW*2)
+			break;
 	}
-	*/
+}
+
+void World::checkfullrow() {
+
 }
 
 void World::update_screen() {
 	wborder(screen, '|', '|', '#', '#', '+', '+', '+', '+');
 	wrefresh(screen);
 }
-
-
-void World::decompose_block(int x, int y) {
-	int pos = coords_to_pos(x, y);
-	grid[pos] = 1;
-}
-
-
-/*
-void World::suckup(Hero t) {
-	int x, y;
-	t.getcoords(&x, &y);
-
-	char b[8];
-	for(int i=0; i<4; i++) {
-		t.getclout(i, b);
-		for(int j=0; j<8; j=j+2) {
-			if(b[j] == '[') {
-				t.getcoords(&x, &y);
-				int p = coords_to_pos((x+j)/2, y+i);
-				grid[p] = 1;
-			}
-		}
-	}
-
-	/*
-	char b;
-	for(int r=height; r>0; r--) {
-		int nb = 0;
-		for(int c=0; c<width; c++) {
-			b = mvinch(r, c) & A_CHARTEXT;
-			mvprintw(r, 41+c, "%c", b);
-			if(b == '[') {
-				nb++;
-				int p = coords_to_pos(c, r);
-				grid[p] = 1;
-			}
-
-		}
-		mvprintw(r, 41, "%d", nb);
-		if(nb==0)
-			break;
-	}
-
-}
-*/
-
-/*
-void World::checkfullrow() {
-	int bl;
-	for(int r=GRIDH; r>0; r--) {
-		bl = 0;
-		for(int c=0; c<GRIDW; c++) {
-			int p = coords_to_pos(c, r);
-			bl += grid[p];
-		}
-		if(bl == 0)
-			break;
-		if(bl == GRIDW) {
-			for(int i=0; i<GRIDW; i++) {
-				int p = coords_to_pos(i, r);
-				grid[p] = 0;
-			}
-
-			int bl2;
-			for(int i=r-1; i>0; i--) {
-				bl2 = 0;
-				int p;
-				for(int j=0; j<GRIDW; j++) {
-					p = coords_to_pos(j, i);
-					if(grid[p]) {
-						bl2++;
-						grid[p+GRIDW] = 1;
-						grid[p] = 0;
-					}
-				}
-				if(bl2 == 0)
-					break;
-				mvprintw(r, 50, "%d", r);
-
-			}
-
-		}
-		mvprintw(r, 43, "%d", bl);
-	}
-}
-*/

@@ -6,7 +6,6 @@
 
 class Tetramino {
 	protected:
-		World *WORLD;
 		int SCRW;
 		int SCRH;
 		int XOFF;

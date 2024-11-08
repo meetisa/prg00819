@@ -5,7 +5,7 @@
 #include "smashboy.hpp"
 #include "gameplay.hpp"
 
-#define CLOCK 20000
+#define CLOCK 10000
 #define SCREEN_WIDTH 40
 
 #define X_OFFSET 2
@@ -32,25 +32,22 @@ void gameplay() {
 		t.getspecs(&tetr_w, &tetr_h);
 		t.print();
 
-		mvprintw(0, 0, "%d", t.side_collisions());
-
-
 		if(++tm % CLOCK == 0) {
 
 			if(!t.falling()) {
 				//world.suckup(t);
 				t.dies();
 				//world.checkfullrow();
+				world.scan();
 				t.del();
 			}
 			tm=0;
 			world.update_screen();
 		}
 
-
 		ch = getch();
 
-		if(ch == 'e')
+		if(ch == 'q')
 			done = true;
 		else if(ch == 'r')
 			t.rotate();

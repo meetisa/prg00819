@@ -5,7 +5,10 @@
 
 typedef struct node {
 	node *next;
+	node *prev;
 	int val;
+	int start_row;
+	int row_blocks;
 } block;
 
 class World {
@@ -15,12 +18,14 @@ class World {
 		int XOFF;
 		WINDOW *screen;
 
+		int GRID_XOFF=1;
+		int GRID_YOFF=1;
+
 		int GRIDW;
 		int GRIDH;
 		int LEN;
 
 		block *grid = NULL;
-		//int *grid;
 
 	public:
 		World(int w, int h, int xoff);
@@ -29,6 +34,7 @@ class World {
 		int coords_to_pos(int x, int y);
 		void pos_to_coords(int pos, int *x, int *y);
 
+		void scan();
 		void draw();
 		void update_screen();
 
