@@ -7,9 +7,11 @@ Tetramino::Tetramino(World world, int w, int h) {
 
 	world.getspecs(&SCRW, &SCRH, &XOFF);
 
-	STARTX = SCRW / 2;
+	STARTX = XOFF + (SCRW/2) - WIDTH;
+	x = STARTX;
+	y = STARTY;
 
-	base = newwin(HEIGHT, WIDTH, y, x);
+	base = newwin(HEIGHT, WIDTH, STARTY, STARTX);
 }
 
 void Tetramino::print(int shape) {
@@ -20,6 +22,7 @@ void Tetramino::print(int shape) {
 	}
 	wrefresh(base);
 }
+
 
 void Tetramino::move(int dir) {
 	x += dir;
@@ -34,8 +37,12 @@ int Tetramino::falling() {
 		wrefresh(base);
 		return 1;
 	}
-	else
-		return 0;
+	else {
+		if(y <= HEIGHT)
+			return -1;
+		else
+			return 0;
+	}
 }
 
 void Tetramino::dies() {
@@ -49,17 +56,12 @@ void Tetramino::dies() {
 			}
 		}
 	}
-}
 
-void Tetramino::getcoords(int *wx, int *wy) {
-	*wx = x;
-	*wy = y;
+	x = STARTX;
+	y = STARTY;
 }
 
 int Tetramino::check_collision() {
-	int x, y;
-	getcoords(&x, &y);
-
 	char b[WIDTH+1];
 	getclout(HEIGHT-1, b);
 
@@ -76,18 +78,8 @@ int Tetramino::check_collision() {
 	return coll;
 }
 
-void Tetramino::getspecs(int *width, int *height) {
-	*width = WIDTH;
-	*height = HEIGHT;
-}
-
 void Tetramino::getclout(int row, char *buffer) {
 	for(int i=0; i<WIDTH+1; i++)
 		buffer[i] = mvwinch(base, row, i) & A_CHARTEXT;
 	buffer[WIDTH] = '\0';
-}
-
-void Tetramino::del() {
-	x = STARTX;
-	y = STARTY;
 }

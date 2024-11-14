@@ -6,6 +6,8 @@ World::World(int w, int h, int xoff) {
 	XOFF = xoff;
 	screen = newwin(SCRH, SCRW, 0, XOFF);
 
+	points_scr = newwin(PNT_SCRH, PNT_SCRW, PNT_SCRY, PNT_SCRX);
+
 	GRIDW = (SCRW/2) - 1;
 	GRIDH = SCRH - 2;
 
@@ -75,7 +77,6 @@ void World::scan() {
 
 		if(pos % GRIDW == 0) {
 			iter->row_blocks = c;
-			mvprintw(GRIDH - row++, 50, "%d", iter->row_blocks);
 			c = 0;
 		}
 
@@ -129,4 +130,10 @@ int World::checkfullrow() {
 void World::update_screen() {
 	wborder(screen, '|', '|', '#', '#', '+', '+', '+', '+');
 	wrefresh(screen);
+}
+
+void World::update_points(int p) {
+	wborder(points_scr, '|', '|', '-', '-', '+', '+', '+', '+');
+	mvwprintw(points_scr, 1, 1, "punteggio: %d", p);
+	wrefresh(points_scr);
 }

@@ -11,30 +11,52 @@ typedef struct node {
 
 class World {
 	private:
-		int SCRW;
-		int SCRH;
+		//dimensioni dello schermo di gioco
+		int SCRW, SCRH;
+
+		//differenza di posizione rispetto all'origine
 		int XOFF;
+
 		WINDOW *screen;
 
+
+		//dimesioni dello schermo dei punti
+		int PNT_SCRW = 25;
+		int PNT_SCRH = 3;
+
+		//posizione dello schermo dei punti
+		int PNT_SCRX = 50;
+		int PNT_SCRY = 2;
+
+		WINDOW *points_scr;
+
+
+		/*
+		 * differenze di posizione dei blocchi
+		 * rispetto allo schermo di gioco
+		 */
 		int GRID_XOFF=1;
 		int GRID_YOFF=1;
 
+		//dimensioni della griglia
 		int GRIDW;
 		int GRIDH;
 		int LEN;
 
-		block *grid = NULL;
+		//la griglia è una lista concatenata
+		block *grid;
 
 	public:
+		//costruttore
 		World(int w, int h, int xoff);
 
 		void getspecs(int *w,  int *h, int *xoff);
-		int coords_to_pos(int x, int y);
 		void pos_to_coords(int pos, int *x, int *y);
 
 		void scan();
 		void draw();
 		void update_screen();
+		void update_points(int p);
 
 		int checkfullrow();
 };

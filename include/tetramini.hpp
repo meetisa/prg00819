@@ -13,11 +13,11 @@ class Tetramino {
 		int WIDTH;
 		int HEIGHT;
 
-		int STARTX;
-		int STARTY = 2;
+		int STARTX=20;
+		int STARTY=1;
 
-		int x = STARTX;
-		int y = STARTY;
+		int x;
+		int y;
 
 		WINDOW *base;
 	public:
@@ -25,20 +25,18 @@ class Tetramino {
 		Tetramino(World world, int w, int h);
 
 		void print(int shape);
-
 		virtual void print_frame()=0;
 
-		virtual void move(int dir);
+		void move(int dir);
+		virtual void safe_move(int dir)=0;
+
 		int falling();
 		void dies();
 
-		void getcoords(int *wx, int *wy);
-		void getspecs(int *width, int *height);
 		void getclout(int row, char *buffer);
 
-		virtual void rotate() =0;
+		virtual void rotate()=0;
 		int check_collision();
-		void del();
 };
 
 #endif

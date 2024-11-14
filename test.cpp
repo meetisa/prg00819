@@ -60,30 +60,17 @@ int main(int argc, char *argv[]) {
 	endwin();
 	*/
 
-	list *head = new list;
-	head->next = NULL;
-	head->val = 1;
+	clock_t t;
+	t=clock();
+	int timer=0;
 
-	list *l=head;
-	int arr[3] = {4, 5, 6};
-	for(int i=0; i<3; i++) {
-		list *nodo = new list;
-		nodo->next = NULL;
-		nodo->val = arr[i];
-		l->next = nodo;
-		l = l->next;
-	}
+	while(1) {
 
-	for(l=head; l!=NULL; l=l->next) {
-		if(l->val == 5) {
-			head=l;
-			break;
-		}
-	}
+		//if(timer != t / CLOCKS_PER_SEC)
+		cout << timer % 2 << endl;
 
-	list *iter;
-	for(iter=head; iter!=NULL; iter=iter->next) {
-		cout << iter->val << endl;
+		t = clock() - t;
+		timer = t / CLOCKS_PER_SEC;
 	}
 
 	return 0;

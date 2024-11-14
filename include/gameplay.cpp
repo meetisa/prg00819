@@ -5,71 +5,107 @@
 #include "smashboy.hpp"
 #include "gameplay.hpp"
 
-#define CLOCK 10000
+#define VELOCITY_MOD 10
 #define SCREEN_WIDTH 42
 
 #define X_OFFSET 2
 
-void gameplay() {
+int gameplay() {
+	//int tm=0;
 
-	srand(time(NULL));
+	clock_t tm;
+	tm=clock();
+	double timer;
+	double vel = CLOCKS_PER_SEC / VELOCITY_MOD;
 
-	int tm=0;
-	int ch;
-	bool done = false;
+	/*
+	 * variabile per contenere il tasto premuto
+	 * dal giocatore
+	 */
+	int command;
 
-	WINDOW *points_scr;
-	points_scr = newwin(3, 25, 2, 50);
-	wborder(points_scr, '|', '|', '-', '-', '+', '+', '+', '+');
+
+	int done = 0;
+
+	/*
+	 * per efficienza lo scherma si aggiorna
+	 * solo quando il tetramino si sta muovendo
+	 */
+	int is_moving=0;
+
+	// i punti della partita
 	int points=0;
 
-	refresh();
+	//variabile contenente l'esito della caduta
+	int falls;
 
 	auto world = World(SCREEN_WIDTH, LINES, X_OFFSET);
 	world.update_screen();
+	world.update_points(points);
 
+	/*
+	 * si utilizza un puntatore alla classe base
+	 * che punterà casualmente, a turno,
+	 * una variabile della classe derivata
+	 */
 	Tetramino *t;
+
 	Hero h(world);
 	Smashboy s(world);
 
-	if(rand() % 2)
-		t = &h;
-	else
-		t = &s;
+	//primo tetramino ad uscire in modo casuale
+	if(rand() % 2) t = &h;
+	else t = &s;
 
 	while(!done) {
-
-		wborder(points_scr, '|', '|', '-', '-', '+', '+', '+', '+');
-		mvwprintw(points_scr, 1, 1, "punteggio: %d", points);
-		wrefresh(points_scr);
+		timer = (double) (clock() - tm) / vel;
 
 		t->print_frame();
 
-		if(++tm % CLOCK == 0) {
-			if(!t->falling()) {
+		if(timer >= 1) {
+			falls = t->falling();
+			if(falls == 0) {
 				t->dies();
 				world.scan();
 				points += world.checkfullrow();
-				t->del();
-				if(rand() % 2) t = &h;
+
+				//scelta casuale del nuovo tetramino
+				if(rand()%2) t = &h;
 				else t = &s;
 			}
-			tm=0;
-			world.update_screen();
+			else if(falls == -1)
+				//game over
+				return points;
+
+			tm=clock();
+			is_moving = 1;
 		}
 
-		ch = getch();
+		command = getch();
 
-		if(ch == 'q')
-			done = true;
-		else if(ch == 'r')
+		//per uscire dalla partita senza game over
+		if(command == 'q')
+			done = 1;
+
+		//rotazione del tetramino
+		else if(command == KEY_UP || command == KEY_DOWN)
 			t->rotate();
-		else if(ch == KEY_LEFT || ch == KEY_RIGHT) {
-			t->move(2 - 4*(ch == KEY_LEFT));
-			world.update_screen();
+
+		//movimento laterale
+		else if(command == KEY_LEFT || command == KEY_RIGHT) {
+			t->safe_move(2 - 4*(command == KEY_LEFT));
+			is_moving = 1;
 		}
 
-		world.draw();
-		refresh();
+		//aggiornamenti ad ogni movimento
+		if(is_moving) {
+			world.update_screen(); /* dello schermo di gioco */
+			world.update_points(points); /* dello schermo dei punti */
+			world.draw(); /* della griglia dei blocchi */
+			is_moving = 0;
+		}
 	}
+
+	//uscita manuale dalla partita
+	return -1;
 }

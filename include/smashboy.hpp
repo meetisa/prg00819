@@ -11,6 +11,7 @@ class Smashboy: public Tetramino {
 	public:
 		Smashboy(World world);
 		void print_frame();
+		void safe_move(int dir);
 		void rotate() {}
 };
 

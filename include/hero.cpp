@@ -6,7 +6,7 @@ void Hero::print_frame() {
 	Tetramino::print(frames[current]);
 }
 
-void Hero::move(int dir) {
+void Hero::safe_move(int dir) {
 	if(!side_collisions()) {
 		int l_limit = (dir<0) * (XOFF - (current * 2) + 1);
 		int r_limit = ((dir<0)*SCRW) + XOFF + SCRW + (current * 4) - WIDTH - 1;
@@ -21,6 +21,11 @@ void Hero::rotate() {
 
 	if(++current >= FRLEN)
 		current = 0;
+
+	if(x < XOFF)
+		move(2);
+	if(current==0 && x > XOFF + SCRW - WIDTH*2)
+		move(-4);
 
 	print_frame();
 
