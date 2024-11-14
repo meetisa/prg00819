@@ -5,9 +5,7 @@
 
 typedef struct node {
 	node *next;
-	node *prev;
 	int val;
-	int start_row;
 	int row_blocks;
 } block;
 
@@ -38,10 +36,7 @@ class World {
 		void draw();
 		void update_screen();
 
-		//void suckup(Hero t);
-		void decompose_block(int x, int y);
-
-		void checkfullrow();
+		int checkfullrow();
 };
 
 #endif

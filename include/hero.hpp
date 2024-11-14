@@ -17,7 +17,7 @@ class Hero: public Tetramino {
 		int current=0;
 	public:
 		Hero(World world);
-		void print();
+		void print_frame();
 		void move(int dir);
 		void rotate();
 		int side_collisions();

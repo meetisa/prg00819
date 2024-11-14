@@ -13,7 +13,7 @@ class Tetramino {
 		int WIDTH;
 		int HEIGHT;
 
-		int STARTX = 5;
+		int STARTX;
 		int STARTY = 2;
 
 		int x = STARTX;
@@ -26,13 +26,17 @@ class Tetramino {
 
 		void print(int shape);
 
-		void move(int dir);
+		virtual void print_frame()=0;
+
+		virtual void move(int dir);
 		int falling();
 		void dies();
 
 		void getcoords(int *wx, int *wy);
 		void getspecs(int *width, int *height);
 		void getclout(int row, char *buffer);
+
+		virtual void rotate() =0;
 		int check_collision();
 		void del();
 };

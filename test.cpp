@@ -1,13 +1,18 @@
 #include <iostream>
 #include <ctime>
-#include <ncurses.h>
+//#include <ncurses.h>
 
 #define CLOCK 1000000
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
+typedef struct node {
+	node *next;
+	int val;
+} list;
 
+int main(int argc, char *argv[]) {
+	/*
 	//initialization functions
 	initscr();
 	start_color();
@@ -53,6 +58,33 @@ int main(int argc, char *argv[]) {
 	}
 
 	endwin();
+	*/
+
+	list *head = new list;
+	head->next = NULL;
+	head->val = 1;
+
+	list *l=head;
+	int arr[3] = {4, 5, 6};
+	for(int i=0; i<3; i++) {
+		list *nodo = new list;
+		nodo->next = NULL;
+		nodo->val = arr[i];
+		l->next = nodo;
+		l = l->next;
+	}
+
+	for(l=head; l!=NULL; l=l->next) {
+		if(l->val == 5) {
+			head=l;
+			break;
+		}
+	}
+
+	list *iter;
+	for(iter=head; iter!=NULL; iter=iter->next) {
+		cout << iter->val << endl;
+	}
 
 	return 0;
 }

@@ -2,7 +2,7 @@
 
 Hero::Hero(World world): Tetramino(world, 4, 4) {}
 
-void Hero::print() {
+void Hero::print_frame() {
 	Tetramino::print(frames[current]);
 }
 
@@ -22,7 +22,7 @@ void Hero::rotate() {
 	if(++current >= FRLEN)
 		current = 0;
 
-	print();
+	print_frame();
 
 	wrefresh(base);
 }

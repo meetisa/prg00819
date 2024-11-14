@@ -10,7 +10,7 @@ class Smashboy: public Tetramino {
 
 	public:
 		Smashboy(World world);
-		void print();
+		void print_frame();
 		void rotate() {}
 };
 

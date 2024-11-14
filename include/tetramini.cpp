@@ -7,16 +7,12 @@ Tetramino::Tetramino(World world, int w, int h) {
 
 	world.getspecs(&SCRW, &SCRH, &XOFF);
 
+	STARTX = SCRW / 2;
+
 	base = newwin(HEIGHT, WIDTH, y, x);
 }
 
 void Tetramino::print(int shape) {
-	/*
-	for(int i=0; i<WIDTH*HEIGHT; i++)
-		if(shape[i] == '1')
-			mvwprintw(base, i/HEIGHT, (i%HEIGHT)*2, "[]");
-	*/
-
 	int i, c=0;
 	for(i=shape; i!=0; i/=2, c++) {
 		if(i % 2)

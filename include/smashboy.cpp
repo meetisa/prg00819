@@ -4,6 +4,6 @@
 
 Smashboy::Smashboy(World world): Tetramino(world, 2, 2) {}
 
-void Smashboy::print() {
+void Smashboy::print_frame() {
 	Tetramino::print(frame);
 }
