@@ -3,7 +3,7 @@ CMP=g++
 IDIR = ./include
 ODIR = ./obj
 
-_OBJ = tetramini.o gameplay.o hero.o smashboy.o world.o
+_OBJ = tetramini.o gameplay.o hero.o smashboy.o world.o menu.o classifica.o
 OBJ = $(patsubst %,  $(ODIR)/%, $(_OBJ))
 
 FLAGS=-lncurses -I/$(IDIR)
