@@ -1,9 +1,11 @@
 #include <iostream>
 #include <ctime>
 #include <ncurses.h>
-#include "include/tetramini.hpp"
-#include "include/gameplay.hpp"
-#include "include/menu.hpp"
+#include "include/tetramini/tetramini.hpp"
+#include "include/states/gameplay.hpp"
+#include "include/states/menu.hpp"
+#include "include/states/classifica.hpp"
+#include "include/states/state_machine"
 
 #define CLOCK 1000000
 
@@ -21,9 +23,6 @@ int main(int argc, char *argv[]) {
 	int tick=0;
 	int done = 0;
 
-	const int MENU = 0;
-	const int PARTITA = 1;
-	const int CLASSIFICA = 2;
 	int currentState = MENU;
 
 	//initialization functions
@@ -37,8 +36,13 @@ int main(int argc, char *argv[]) {
 
 	curs_set(0); //invisible cursor
 
-	auto p = Partita();
-	auto m = Menu();
+	const char *file_classifica = "classifica.txt";
+
+	// auto p = Partita();
+	// auto m = Menu();
+	// auto c = Classifica();
+
+	auto machine = StateMachine();
 
 	int chosen=0;
 
@@ -73,16 +77,18 @@ int main(int argc, char *argv[]) {
 			break;
 
 			case PARTITA:
-				p.gameplay(input, tick);
+				if(p.gameplay(input, tick) == 0) {
+					currentState = CLASSIFICA;
+					clear();
+				}
 			break;
 
 			case CLASSIFICA:
-
+				c.display();
 			break;
 		}
 	}
 
 	endwin();
-
 	return 0;
 }

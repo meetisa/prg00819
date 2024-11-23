@@ -48,7 +48,7 @@ int Partita::gameplay(int input, int tick) {
 		}
 		else if(falls == -1)
 			//game over
-			return points;
+			return 0;
 
 		is_moving = 1;
 	}

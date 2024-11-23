@@ -3,11 +3,12 @@
 
 #include <ncurses.h>
 #include "world.hpp"
-#include "tetramini.hpp"
-#include "hero.hpp"
-#include "smashboy.hpp"
+#include "state.hpp"
+#include "../tetramini/tetramini.hpp"
+#include "../tetramini/hero.hpp"
+#include "../tetramini/smashboy.hpp"
 
-class Partita {
+class Partita : public State {
 	private:
 		World *world;
 

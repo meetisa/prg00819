@@ -2,7 +2,7 @@
 #define TETRAMINI_HPP
 
 #include <ncurses.h>
-#include "world.hpp"
+#include "../states/world.hpp"
 
 class Tetramino {
 	protected:

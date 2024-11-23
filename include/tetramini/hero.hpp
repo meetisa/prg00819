@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "tetramini.hpp"
-#include "world.hpp"
+#include "../states/world.hpp"
 
 #define FRLEN 2
 
