@@ -35,7 +35,10 @@ class Menu : public State {
 
 	public:
 		Menu();
-		void update(int input);
+
+		void draw();
+
+		int update(int input);
 };
 
 #endif

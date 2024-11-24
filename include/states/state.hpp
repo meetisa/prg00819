@@ -15,12 +15,14 @@ class State {
 		state next;
 
 	public:
-		State();
+		State() {}
 
 		void setDone(int d);
 		int isDone();
+		void setNext(state n);
 		state getNext();
-		virtual void update(int input)=0;
+
+		virtual int update(int input)=0;
 };
 
 #endif

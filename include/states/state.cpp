@@ -8,6 +8,10 @@ int State::isDone() {
 	return done;
 }
 
+void State::setNext(state n) {
+	next = n;
+}
+
 state State::getNext() {
 	return next;
 }

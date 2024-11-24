@@ -5,7 +5,15 @@
 
 #define X_OFFSET 2
 
-Partita::Partita() {
+Partita::Partita() : State() {
+
+	srand(time(NULL));
+
+	tm = clock();
+
+	velocity = CLOCKS_PER_SEC / 10;
+
+
 	world = new World(SCREEN_WIDTH, LINES, X_OFFSET);
 	world->update_screen();
 	world->update_points(points);
@@ -21,7 +29,16 @@ Partita::Partita() {
 }
 
 
-int Partita::gameplay(int input, int tick) {
+int Partita::update(int input) {
+
+	timer = (double) (clock() - tm) / velocity;
+	if(timer >= 1) {
+		tm = clock();
+		tick = 1;
+	}
+	else
+		tick = 0;
+
 
 	t->print_frame();
 
@@ -46,7 +63,7 @@ int Partita::gameplay(int input, int tick) {
 			if(rand()%2) t = h;
 			else t = s;
 		}
-		else if(falls == -1)
+		else if(falls == -1) {}
 			//game over
 			return 0;
 
@@ -62,5 +79,5 @@ int Partita::gameplay(int input, int tick) {
 	}
 
 	//uscita manuale dalla partita
-	return -1;
+	 return -1;
 }

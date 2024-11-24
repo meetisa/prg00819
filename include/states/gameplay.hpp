@@ -1,6 +1,7 @@
-#ifndef GAMEPLAY
-#define GAMEPLAY
+#ifndef GAMEPLAY_HPP
+#define GAMEPLAY_HPP
 
+#include <ctime>
 #include <ncurses.h>
 #include "world.hpp"
 #include "state.hpp"
@@ -11,6 +12,12 @@
 class Partita : public State {
 	private:
 		World *world;
+
+		double timer;
+		clock_t tm;
+		double velocity;
+
+		int tick;
 
 		/*
 		 * si utilizza un puntatore alla classe base
@@ -29,7 +36,7 @@ class Partita : public State {
 	public:
 		Partita();
 
-		int gameplay(int input, int tick);
+		int update(int input);
 };
 
 #endif

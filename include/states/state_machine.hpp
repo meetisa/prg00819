@@ -1,8 +1,10 @@
 #ifndef STATE_MACHINE_HPP
 #define STATE_MACHINE_HPP
 
-#include "state.hpp"
+#include <ctime>
+#include <ncurses.h>
 
+#include "state.hpp"
 #include "menu.hpp"
 #include "gameplay.hpp"
 #include "classifica.hpp"
@@ -17,6 +19,8 @@ class StateMachine {
 
 	public:
 		StateMachine(state start);
+
+		void init_ncurses();
 
 		void flip();
 		void update(int input);

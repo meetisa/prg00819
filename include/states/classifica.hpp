@@ -25,6 +25,11 @@ class Classifica : public State {
 		Classifica();
 		void display();
 		void addPlayer(char *name);
+
+		int update(int input) {
+			return input;
+
+		}
 };
 
 #endif

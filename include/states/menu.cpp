@@ -1,8 +1,9 @@
 #include "menu.hpp"
 
-Menu::Menu() {
+Menu::Menu() : State() {
 	int maxw, maxh;
-	int i;
+
+	setNext(PARTITA);
 
 	WIDTH = 40;
 	/*
@@ -17,19 +18,22 @@ Menu::Menu() {
 	STARTX = (maxw/2) - (WIDTH/2);
 
 	win = newwin(HEIGHT, WIDTH, STARTY, STARTX);
+}
+
+void Menu::draw() {
 	wborder(win, '|', '|', '-', '-', '+', '+', '+', '+');
 
-	for(i=0; i<OPT_LEN; i++) {
+	for(int i=0; i<OPT_LEN; i++) {
 		mvwprintw(win, i*ROW_SPACING + TEXT_YOFF, TEXT_XOFF, "%s", options[i]);
 	}
 
-	refresh();
-
 	CRS_Y = cursor*ROW_SPACING + CRS_YOFF;
 	mvwprintw(win, CRS_Y, CRS_X, "%c", CRS_CH);
+
 }
 
-void Menu::update(int input) {
+int Menu::update(int input) {
+
 	if(input == KEY_DOWN || input == KEY_UP) {
 		mvwprintw(win, CRS_Y, CRS_X, " ");
 
@@ -45,10 +49,18 @@ void Menu::update(int input) {
 		wattroff(win, A_BOLD);
 	}
 
+
+	draw();
+
 	wrefresh(win);
 
-/*	if(input == ' ')
-		return cursor;
-	else
-		return -1*/;
+	if(input == ' ') {
+		setDone(1);
+		werase(win);
+		wrefresh(win);
+		delwin(win);
+	}
+
+
+	return 0;
 }

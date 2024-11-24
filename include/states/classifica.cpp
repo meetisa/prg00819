@@ -1,6 +1,6 @@
 #include "classifica.hpp"
 
-Classifica::Classifica() {
+Classifica::Classifica() : State() {
 	ifile.open(filename);
 	char ch;
 	int maxw, maxh;
