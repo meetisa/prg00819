@@ -7,8 +7,6 @@
 
 Partita::Partita() : State() {
 
-	srand(time(NULL));
-
 	tm = clock();
 
 	velocity = CLOCKS_PER_SEC / 10;
@@ -30,6 +28,15 @@ Partita::Partita() : State() {
 
 
 int Partita::update(int input) {
+	char n;
+	int p;
+	if(!game_over)
+		gameplay(input);
+	else
+		gameOver(input, &n, &p);
+}
+
+int Partita::gameplay(int input) {
 
 	timer = (double) (clock() - tm) / velocity;
 	if(timer >= 1) {
@@ -63,7 +70,7 @@ int Partita::update(int input) {
 			if(rand()%2) t = h;
 			else t = s;
 		}
-		else if(falls == -1) {}
+		else if(falls == -1)
 			//game over
 			return 0;
 
@@ -80,4 +87,17 @@ int Partita::update(int input) {
 
 	//uscita manuale dalla partita
 	 return -1;
+}
+
+void Partita::gameOver(int input, char *name, int *points) {
+	WINDOW *insert_name;
+	insert_name = newwin(3, 50, 3, 4);
+	wborder(insert_name, '|', '|', '-', '-', '+', '+', '+', '+');
+
+
+	int x=1, y=1;
+	if(input != -1)
+		mvwprintw(insert_name, y, x++, "%c", (char) input);
+
+	wrefresh(insert_name);
 }

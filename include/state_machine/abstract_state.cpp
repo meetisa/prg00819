@@ -1,4 +1,4 @@
-#include "state.hpp"
+#include "abstract_state.hpp"
 
 void State::setDone(int d) {
 	done = d;

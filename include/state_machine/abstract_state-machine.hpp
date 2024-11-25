@@ -1,16 +1,17 @@
-#ifndef STATE_MACHINE_HPP
-#define STATE_MACHINE_HPP
+#ifndef ABSTRACT_STATE_MACHINE_HPP
+#define ABSTRACT_STATE_MACHINE_HPP
 
 #include <ctime>
 #include <ncurses.h>
 
-#include "state.hpp"
-#include "menu.hpp"
-#include "gameplay.hpp"
-#include "classifica.hpp"
+#include "abstract_state.hpp"
+
+#include "../states/menu.hpp"
+#include "../states/gameplay.hpp"
+#include "../states/classifica.hpp"
 
 class StateMachine {
-	private:
+	protected:
 		int done = 0;
 
 		state current_state;
@@ -21,7 +22,6 @@ class StateMachine {
 		StateMachine(state start);
 
 		void init_ncurses();
-
 		void flip();
 		void update(int input);
 		void game_loop();

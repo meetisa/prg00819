@@ -1,14 +1,10 @@
-#include <iostream>
-#include <ctime>
-#include <ncurses.h>
-#include "include/tetramini/tetramini.hpp"
-#include "include/states/gameplay.hpp"
-#include "include/states/menu.hpp"
-#include "include/states/classifica.hpp"
-#include "include/states/state_machine.hpp"
+#include "include/state_machine/abstract_state-machine.hpp"
+
 using namespace std;
 
 int main() {
+
+	srand(time(NULL));
 
 	auto machine = StateMachine(MENU);
 

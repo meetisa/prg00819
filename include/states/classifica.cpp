@@ -1,12 +1,43 @@
 #include "classifica.hpp"
 
 Classifica::Classifica() : State() {
+
+	player *iter;
+	iter=head;
+
 	ifile.open(filename);
-	char ch;
-	int maxw, maxh;
+	char ch, pname[50], points[50];
+	int maxw, maxh, p, n=0;
+	int i_n=0, i_p=0;
 
 	while(!ifile.eof()) {
 		ifile.get(ch);
+
+		if(n)
+			points[i_p++] = ch;
+		else
+			pname[i_n++] = ch;
+
+		if(n && ch == '\n') {
+			points[i_p] = '\0';
+			i_p=0;
+			n = 0;
+			p = atoi(points);
+
+			iter->points = p;
+
+			iter->next = new player;
+			iter->next->next = NULL;
+			iter = iter->next;
+		}
+
+		if(ch == '@') {
+			pname[i_n-1] = '\0';
+			i_n=0;
+			n=1;
+			strcpy(iter->name, pname);
+		}
+
 		length += ch == '\n';
 	}
 
@@ -27,14 +58,22 @@ Classifica::Classifica() : State() {
 	STARTX = (maxw/2) - (WIDTH/2);
 
 	win = newwin(HEIGHT, WIDTH, STARTY, STARTX);
-	wborder(win, '|', '|', '-', '-', '+', '+', '+', '+');
+}
+
+int Classifica::update(int input) {
+	if(previous == MENU)
+		display();
+
+	return 0;
 }
 
 void Classifica::display() {
-	ifile.open(filename);
-	char ch;
+	wborder(win, '|', '|', '-', '-', '+', '+', '+', '+');
 
+	char ch;
 	int x=0, y=0;
+
+	ifile.open(filename);
 
 	while(!ifile.eof()) {
 		ifile.get(ch);
@@ -50,4 +89,8 @@ void Classifica::display() {
 	ifile.close();
 
 	wrefresh(win);
+}
+
+
+void Classifica::addPlayer(player p) {
 }

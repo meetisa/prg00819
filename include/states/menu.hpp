@@ -2,7 +2,8 @@
 #define MENU_HPP
 
 #include <ncurses.h>
-#include "state.hpp"
+#include "../state_machine/abstract_state.hpp"
+#include "screen.hpp"
 
 #define OPT_LEN 2
 
@@ -14,14 +15,14 @@ class Menu : public State {
 
 		WINDOW *win;
 
-
 		const int ROW_SPACING = 2;
-
 
 		const char *options[OPT_LEN] = {
 			"Nuova partita",
 			"Classifica"
 		};
+
+		// List opt;
 
 		const int TEXT_XOFF = 4;
 		const int TEXT_YOFF = 2;

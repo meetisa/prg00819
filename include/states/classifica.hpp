@@ -1,16 +1,25 @@
 #ifndef CLASSIFICA_HPP
 #define CLASSIFICA_HPP
 
+#include <string.h>
 #include <fstream>
 #include <ncurses.h>
-#include "state.hpp"
+#include "../state_machine/abstract_state.hpp"
 using namespace std;
+
+typedef struct pnode {
+	pnode *next;
+	char name[50];
+	int points;
+} player;
 
 class Classifica : public State {
 	private:
 		const char *filename = "classifica.txt";
 		ofstream ofile;
 		ifstream ifile;
+
+		player *head = new player;
 
 		int WIDTH, HEIGHT;
 		int STARTX, STARTY;
@@ -23,13 +32,12 @@ class Classifica : public State {
 
 	public:
 		Classifica();
+		int update(int input);
+
 		void display();
-		void addPlayer(char *name);
+		player gameOverScreen(int points);
 
-		int update(int input) {
-			return input;
-
-		}
+		void addPlayer(player p);
 };
 
 #endif

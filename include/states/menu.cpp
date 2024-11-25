@@ -1,9 +1,8 @@
 #include "menu.hpp"
 
 Menu::Menu() : State() {
-	int maxw, maxh;
 
-	setNext(PARTITA);
+	int maxw, maxh;
 
 	WIDTH = 40;
 	/*
@@ -18,18 +17,22 @@ Menu::Menu() : State() {
 	STARTX = (maxw/2) - (WIDTH/2);
 
 	win = newwin(HEIGHT, WIDTH, STARTY, STARTX);
+
+	// opt.init(WIDTH, HEIGHT, STARTY, STARTX, "||--++++");
+	// char o[] = "Nuova partita\nClassifica";
+	// opt.init_text(o, 2, ROW_SPACING, TEXT_XOFF, TEXT_YOFF);
 }
 
 void Menu::draw() {
-	wborder(win, '|', '|', '-', '-', '+', '+', '+', '+');
+	// opt.show_list();
 
+	wborder(win, '|', '|', '-', '-', '+', '+', '+', '+');
 	for(int i=0; i<OPT_LEN; i++) {
 		mvwprintw(win, i*ROW_SPACING + TEXT_YOFF, TEXT_XOFF, "%s", options[i]);
 	}
 
 	CRS_Y = cursor*ROW_SPACING + CRS_YOFF;
 	mvwprintw(win, CRS_Y, CRS_X, "%c", CRS_CH);
-
 }
 
 int Menu::update(int input) {
@@ -55,6 +58,11 @@ int Menu::update(int input) {
 	wrefresh(win);
 
 	if(input == ' ') {
+		if(cursor)
+			setNext(CLASSIFICA);
+		else
+			setNext(PARTITA);
+
 		setDone(1);
 		werase(win);
 		wrefresh(win);

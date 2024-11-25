@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <string.h>
 #include <ncurses.h>
 using namespace std;
 
@@ -120,22 +122,88 @@ class StateMachine {
 		}
 };
 
+typedef struct node {
+	char name[100];
+	int points;
+	node *next;
+} player;
+
 int main() {
 	//initialization functions
-	initscr();
-	start_color();
-	raw();
-	cbreak();
-	noecho();
-	nodelay(stdscr, TRUE);
-	keypad(stdscr, TRUE);
+	// initscr();
+	// start_color();
+	// raw();
+	// cbreak();
+	// noecho();
+	// nodelay(stdscr, TRUE);
+	// keypad(stdscr, TRUE);
+ //
+	// curs_set(0); //invisible cursor
+ //
+	// auto m = StateMachine(STATE1);
+ //
+	// m.game_loop();
+ //
+	// endwin();
 
-	curs_set(0); //invisible cursor
 
-	auto m = StateMachine(STATE1);
+	const char *filename = "classifica.txt";
+	const char *name = "coglione";
+	int np = 560;
+	char pname[100];
+	char points[100];
+	ofstream ofile;
+	ifstream ifile;
 
-	m.game_loop();
+	player *head;
+	player *iter;
+	head = new player;
+	head->next = NULL;
+	iter = head;
 
-	endwin();
+	ifile.open(filename);
+	char ch;
+	int p, n=0, i=0, j=0;
+	while(!ifile.eof()) {
+		ifile.get(ch);
+
+		if(n)
+			points[i++] = ch;
+		else
+			pname[j++] = ch;
+
+		if(n && ch == '\n') {
+			points[i] = '\0';
+			i=0;
+			n = 0;
+			p = atoi(points);
+			iter->points = p;
+
+			iter->next = new player;
+			iter->next->next = NULL;
+			iter = iter->next;
+		}
+
+		if(ch == '@') {
+			pname[j-1] = '\0';
+			j=0;
+			n=1;
+			strcpy(iter->name, pname);
+		}
+	}
+
+	ifile.close();
+
+	ofile.open(filename);
+
+	for(iter=head; iter->next!=NULL; iter=iter->next) {
+		ofile << iter->name << '@' << iter->points << endl;
+
+		if(np < iter->points && np > iter->next->points)
+			ofile << name << '@' << np << endl;
+	}
+
+	ofile.close();
+
 	return 0;
 }
