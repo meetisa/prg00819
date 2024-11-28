@@ -15,3 +15,12 @@ void State::setNext(state n) {
 state State::getNext() {
 	return next;
 }
+
+
+void State::Quit() {
+	quit = 1;
+}
+
+int State::getQuit() {
+	return quit;
+}

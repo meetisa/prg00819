@@ -20,7 +20,7 @@ void StateMachine::init_ncurses() {
 	//initialization functions
 	initscr();
 	start_color();
-	raw();
+	// raw();
 	cbreak();
 	noecho();
 	nodelay(stdscr, TRUE);
@@ -42,6 +42,10 @@ void StateMachine::flip() {
 
 
 void StateMachine::update(int input) {
+	if(current->getQuit()) {
+		done = 1;
+		return;
+	}
 	if(current->isDone())
 		flip();
 

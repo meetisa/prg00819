@@ -5,32 +5,18 @@
 #include "../state_machine/abstract_state.hpp"
 #include "screen.hpp"
 
-#define OPT_LEN 2
-
 class Menu : public State {
 	private:
+		int ROW_SPACING = 2;
 
-		int WIDTH, HEIGHT;
-		int STARTX, STARTY;
+		List options;
 
-		WINDOW *win;
-
-		const int ROW_SPACING = 2;
-
-		const char *options[OPT_LEN] = {
-			"Nuova partita",
-			"Classifica"
-		};
-
-		// List opt;
-
-		const int TEXT_XOFF = 4;
-		const int TEXT_YOFF = 2;
-
+		int TEXT_XOFF = 6;
+		int TEXT_YOFF = 1;
 
 		const char CRS_CH = '>';
-		const int CRS_YOFF = 2;
-		const int CRS_X = 2;
+		int CRS_YOFF;
+		int CRS_X;
 		int CRS_Y;
 		int cursor = 0;
 

@@ -1,74 +1,69 @@
 #include "menu.hpp"
 
 Menu::Menu() : State() {
+	CRS_YOFF = TEXT_YOFF+1;
+	CRS_X = TEXT_XOFF/2;
 
-	int maxw, maxh;
-
-	WIDTH = 40;
-	/*
-	 * il +1 serve per avere una riga vuota
-	 * all'inizio e una alla fine (*2 +1),
-	 * mentre il +2 sono i bordi sopra e sotto
-	 */
-	HEIGHT = OPT_LEN*ROW_SPACING +1 +2;
-
-	getmaxyx(stdscr, maxh, maxw);
-	STARTY = (maxh/2) - (HEIGHT/2);
-	STARTX = (maxw/2) - (WIDTH/2);
-
-	win = newwin(HEIGHT, WIDTH, STARTY, STARTX);
-
-	// opt.init(WIDTH, HEIGHT, STARTY, STARTX, "||--++++");
-	// char o[] = "Nuova partita\nClassifica";
-	// opt.init_text(o, 2, ROW_SPACING, TEXT_XOFF, TEXT_YOFF);
+	options.init(
+		"Nuova partita\nClassifica\nEsci", // lista divisa da \n
+		ROW_SPACING, // spazio tra le righe
+		TEXT_XOFF, // offset della x
+		TEXT_YOFF, // offset della y
+		"||--++++" // bordi della finestra
+	);
+	options.setInCenter();
 }
 
 void Menu::draw() {
-	// opt.show_list();
-
-	wborder(win, '|', '|', '-', '-', '+', '+', '+', '+');
-	for(int i=0; i<OPT_LEN; i++) {
-		mvwprintw(win, i*ROW_SPACING + TEXT_YOFF, TEXT_XOFF, "%s", options[i]);
-	}
+	options.show_list();
 
 	CRS_Y = cursor*ROW_SPACING + CRS_YOFF;
-	mvwprintw(win, CRS_Y, CRS_X, "%c", CRS_CH);
+
+	wattron(options.win, A_BOLD);
+	mvwprintw(options.win, CRS_Y, CRS_X, "%c", CRS_CH);
+	wattroff(options.win, A_BOLD);
 }
 
 int Menu::update(int input) {
 
+	int len = options.get_len();
+
 	if(input == KEY_DOWN || input == KEY_UP) {
-		mvwprintw(win, CRS_Y, CRS_X, " ");
+		// Cancello il vecchio cursore
+		mvwprintw(options.win, CRS_Y, CRS_X, " ");
 
-		cursor++;
-		if(cursor >= OPT_LEN)
+		// Aggiorno in quale opzione è la il cursore
+		cursor += 1 -2*(input==KEY_UP);
+
+		// Per ciclare il c
+		if(cursor >= len)
 			cursor = 0;
+		if(cursor < 0)
+			cursor = len-1;
 
+		// Aggiiorno la posizione del cursore nello schermo
 		CRS_Y = cursor*ROW_SPACING + CRS_YOFF;
-		wattron(win, A_BOLD);
 
-		mvwprintw(win, CRS_Y, CRS_X, "%c", CRS_CH);
-
-		wattroff(win, A_BOLD);
+		// Stampo il cursore nuovo
+		wattron(options.win, A_BOLD);
+		mvwprintw(options.win, CRS_Y, CRS_X, "%c", CRS_CH);
+		wattroff(options.win, A_BOLD);
 	}
-
 
 	draw();
 
-	wrefresh(win);
-
 	if(input == ' ') {
-		if(cursor)
-			setNext(CLASSIFICA);
-		else
+		if(cursor==0)
 			setNext(PARTITA);
+		if(cursor==1)
+			setNext(CLASSIFICA);
+		if(cursor==2)
+			Quit();
 
 		setDone(1);
-		werase(win);
-		wrefresh(win);
-		delwin(win);
+		werase(options.win);
+		delwin(options.win);
 	}
-
 
 	return 0;
 }

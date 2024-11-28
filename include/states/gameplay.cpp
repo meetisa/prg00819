@@ -7,6 +7,8 @@
 
 Partita::Partita() : State() {
 
+	setNext(CLASSIFICA);
+
 	tm = clock();
 
 	velocity = CLOCKS_PER_SEC / 10;
@@ -28,12 +30,9 @@ Partita::Partita() : State() {
 
 
 int Partita::update(int input) {
-	char n;
-	int p;
-	if(!game_over)
-		gameplay(input);
-	else
-		gameOver(input, &n, &p);
+	gameOver();
+	// gameplay(input);
+	return 0;
 }
 
 int Partita::gameplay(int input) {
@@ -70,9 +69,12 @@ int Partita::gameplay(int input) {
 			if(rand()%2) t = h;
 			else t = s;
 		}
-		else if(falls == -1)
-			//game over
+		// game over
+		else if(falls == -1) {
+			game_over = 1;
+
 			return 0;
+		}
 
 		is_moving = 1;
 	}
@@ -89,15 +91,32 @@ int Partita::gameplay(int input) {
 	 return -1;
 }
 
-void Partita::gameOver(int input, char *name, int *points) {
-	WINDOW *insert_name;
-	insert_name = newwin(3, 50, 3, 4);
-	wborder(insert_name, '|', '|', '-', '-', '+', '+', '+', '+');
+void Partita::gameOver() {
 
+	fstream classifica;
+	classifica.open("classifica.txt", fstream::app);
+	classifica << points;
+	classifica.close();
 
-	int x=1, y=1;
-	if(input != -1)
-		mvwprintw(insert_name, y, x++, "%c", (char) input);
+	setDone(1);
 
-	wrefresh(insert_name);
+	// echo();
+ //
+	// WINDOW *insert_name;
+	// insert_name = newwin(3, 50, 3, 4);
+	// wborder(insert_name, '|', '|', '-', '-', '+', '+', '+', '+');
+ //
+	// char name[50];
+ //
+	// mvwscanw(insert_name, 1, 1, "%s", name);
+ //
+	// wrefresh(insert_name);
+ //
+	// noecho();
+ //
+	// setNext(CLASSIFICA);
+ //
+	// setDone(1);
+ //
+	// return name;
 }

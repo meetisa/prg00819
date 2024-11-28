@@ -2,12 +2,14 @@
 #define GAMEPLAY_HPP
 
 #include <ctime>
+#include <fstream>
 #include <ncurses.h>
 #include "world.hpp"
 #include "../state_machine/abstract_state.hpp"
 #include "../tetramini/tetramini.hpp"
 #include "../tetramini/hero.hpp"
 #include "../tetramini/smashboy.hpp"
+using namespace std;
 
 class Partita : public State {
 	private:
@@ -30,8 +32,8 @@ class Partita : public State {
 
 		int input;
 		int is_moving=0;
-		int points=0;
-		int game_over = 1;
+		int points=100;
+		int game_over=0;
 		int falls;
 
 	public:
@@ -40,7 +42,7 @@ class Partita : public State {
 		int update(int input);
 
 		int gameplay(int input);
-		void gameOver(int input, char *name, int *points);
+		void gameOver();
 };
 
 #endif

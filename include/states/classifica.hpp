@@ -5,6 +5,7 @@
 #include <fstream>
 #include <ncurses.h>
 #include "../state_machine/abstract_state.hpp"
+#include "screen.hpp"
 using namespace std;
 
 typedef struct pnode {
@@ -21,13 +22,13 @@ class Classifica : public State {
 
 		player *head = new player;
 
-		int WIDTH, HEIGHT;
-		int STARTX, STARTY;
-		WINDOW *win;
+		char *players;
 
-		const int ROW_SPACING = 2;
-		const int TEXT_XOFF = 2;
-		const int TEXT_YOFF = 2;
+		List chart;
+
+		int ROW_SPACING = 2;
+		int TEXT_XOFF = 3;
+		int TEXT_YOFF = 1;
 		int length=0;
 
 	public:
@@ -37,7 +38,7 @@ class Classifica : public State {
 		void display();
 		player gameOverScreen(int points);
 
-		void addPlayer(player p);
+		void addPlayer();
 };
 
 #endif

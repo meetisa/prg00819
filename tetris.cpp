@@ -6,7 +6,7 @@ int main() {
 
 	srand(time(NULL));
 
-	auto machine = StateMachine(MENU);
+	auto machine = StateMachine(PARTITA);
 
 	machine.game_loop();
 

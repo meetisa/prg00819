@@ -154,7 +154,33 @@ int main() {
 	char points[100];
 	ofstream ofile;
 	ifstream ifile;
+ //
+	// ifile.open(filename);
+	// char ch;
+	// char *players;
+	// players = new char[1000];
+	// int i=0, ch_len=0, len=0;
+ //
+	// while(!ifile.eof()) {
+	// 	ifile.get();
+	// 	ch_len++;
+	// }
+ //
+ //
+	// ifile.clear();
+	// ifile.seekg(0);
+ //
+	// while(!ifile.eof()) {
+	// 	ifile.get(players[i]);
+	// 	if(players[i++] == '\n')
+	// 		len++;
+	// }
+ //
+	// players[i-2] = '\0';
+ //
+	// cout << players;
 
+	// 		iter->next = new player;
 	player *head;
 	player *iter;
 	head = new player;
@@ -163,47 +189,80 @@ int main() {
 
 	ifile.open(filename);
 	char ch;
-	int p, n=0, i=0, j=0;
-	while(!ifile.eof()) {
-		ifile.get(ch);
+	char riga[100];
+	int del=0, j=0, len;
 
-		if(n)
-			points[i++] = ch;
-		else
-			pname[j++] = ch;
-
-		if(n && ch == '\n') {
-			points[i] = '\0';
-			i=0;
-			n = 0;
-			p = atoi(points);
-			iter->points = p;
-
-			iter->next = new player;
-			iter->next->next = NULL;
-			iter = iter->next;
+	while(ifile.getline(riga, sizeof(riga), '\n')) {
+		len = strlen(riga);
+		char nm[len], pn[len];
+		for(int i=0; i<len; i++) {
+			if(riga[i] == '@') {
+				nm[i] = '\0';
+				del=1;
+			}
+			else if(!del) {
+				nm[i] = riga[i];
+			}
+			else {
+				pn[j++] = riga[i];
+			}
 		}
+		strcpy(iter->name, nm);
+		iter->points = atoi(pn);
 
-		if(ch == '@') {
-			pname[j-1] = '\0';
-			j=0;
-			n=1;
-			strcpy(iter->name, pname);
-		}
+		iter->next = new player;
+		iter->next->next = NULL;
+		iter = iter->next;
+
+		del = 0;
+		j = 0;
 	}
+
+	for(iter=head; iter->next!=NULL; iter=iter->next)
+		cout << iter->name << " " << iter->points << endl;
+
+
+	// int p, n=0, i=0, j=0;
+	// while(!ifile.eof()) {
+	// 	ifile.get(ch);
+ //
+	// 	if(n)
+	// 		points[i++] = ch;
+	// 	else
+	// 		pname[j++] = ch;
+ //
+	// 	if(n && ch == '\n') {
+	// 		points[i] = '\0';
+	// 		i=0;
+	// 		n = 0;
+	// 		p = atoi(points);
+	// 		iter->points = p;
+ //
+	// 		iter->next = new player;
+	// 		iter->next->next = NULL;
+	// 		iter = iter->next;
+	// 	}
+ //
+	// 	if(ch == '@') {
+	// 		pname[j-1] = '\0';
+	// 		j=0;
+	// 		n=1;
+	// 		strcpy(iter->name, pname);
+	// 	}
+	// }
 
 	ifile.close();
 
-	ofile.open(filename);
-
-	for(iter=head; iter->next!=NULL; iter=iter->next) {
-		ofile << iter->name << '@' << iter->points << endl;
-
-		if(np < iter->points && np > iter->next->points)
-			ofile << name << '@' << np << endl;
-	}
-
-	ofile.close();
+	// ofile.open(filename);
+ //
+	// for(iter=head; iter->next!=NULL; iter=iter->next) {
+	// 	ofile << iter->name << '@' << iter->points << endl;
+ //
+	// 	if(np < iter->points && np > iter->next->points)
+	// 		ofile << name << '@' << np << endl;
+	// }
+ //
+	// ofile.close();
 
 	return 0;
 }

@@ -10,21 +10,25 @@ class Screen {
 		int STARTY, STARTX;
 		char BORDERS[8];
 
+	public:
+
 		WINDOW *win;
 
-	public:
 		Screen(){};
 		void init(int w, int h, int stx, int sty, char borders[]);
+		void setInCenter();
 
 		void show();
 };
 
 class List : public Screen {
 	private:
-		int LENGTH;
+		int LENGTH=1;
 		int ROW_SPACING;
 		int TEXT_XOFF;
 		int TEXT_YOFF;
+
+		int TOTAL_CHARS_LEN;
 
 		char *list;
 
@@ -32,11 +36,11 @@ class List : public Screen {
 
 		List(){};
 
-		void init(int w, int h, int stx, int sty, char borders[]);
-
-		void init_text(char text[], int l, int r_s, int txt_xoff, int txt_yoff);
+		void init(char text[], int r_s, int txt_xoff, int txt_yoff, char borders[]);
 
 		void show_list();
+
+		int get_len() {return LENGTH;}
 };
 
 #endif

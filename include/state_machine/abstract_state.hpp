@@ -12,6 +12,7 @@ typedef enum states_list {
 class State {
 	protected:
 		int done = 0;
+		int quit=0;
 		state next;
 		state previous;
 
@@ -22,6 +23,8 @@ class State {
 		int isDone();
 		void setNext(state n);
 		state getNext();
+		void Quit();
+		int getQuit();
 
 		virtual int update(int input)=0;
 };

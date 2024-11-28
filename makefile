@@ -30,6 +30,6 @@ $(ODIR)/%.o: $(TETR_DIR)/%.cpp $(TETR_DIR)/%.hpp
 # main
 tetris: tetris.cpp $(OBJ)
 	$(CMP) -o $@ $^ $(FLAGS) && ./$@
-
+#
 # t: t.cpp
 # 	$(CMP) -o $@ $^ -lncurses $(FLAGS)
