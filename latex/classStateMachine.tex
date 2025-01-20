@@ -1,0 +1,106 @@
+\doxysection{Riferimenti per la classe State\+Machine}
+\hypertarget{classStateMachine}{}\label{classStateMachine}\index{StateMachine@{StateMachine}}
+
+
+{\ttfamily \#include $<$state\+\_\+machine.\+hpp$>$}
+
+\doxysubsubsection*{Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classStateMachine_a093e964bd1e5caf4ab869e66c856bcea}{State\+Machine}} (state start)
+\begin{DoxyCompactList}\small\item\em Costruttore della classe. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classStateMachine_a4021e0f465b06dbee395cb3ace2bd698}{init\+\_\+ncurses}} ()
+\begin{DoxyCompactList}\small\item\em Inizializza le funzioni di ncurses. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classStateMachine_a3e815fc564dae487ea3df32c9bde0e4c}{flip}} ()
+\begin{DoxyCompactList}\small\item\em Cambia stato di gioco. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classStateMachine_a47c6185a26f0725e947bf09872965481}{update}} (int input)
+\begin{DoxyCompactList}\small\item\em Aggiorna lo stato attuale. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classStateMachine_a422e12d68b423c9f9511420b077a028b}{game\+\_\+loop}} ()
+\begin{DoxyCompactList}\small\item\em Ciclo principale del gioco. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Attributi protetti}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classStateMachine_a78b57e26bb9e62fc5b9e76e11132f9ea}\label{classStateMachine_a78b57e26bb9e62fc5b9e76e11132f9ea} 
+int {\bfseries done} = 0
+\item 
+\Hypertarget{classStateMachine_aeff619be25e5d9d24d2038bac4ac4129}\label{classStateMachine_aeff619be25e5d9d24d2038bac4ac4129} 
+state {\bfseries current\+\_\+state}
+\item 
+\Hypertarget{classStateMachine_a3e87828e64b7ab5dbf36020b81f3770d}\label{classStateMachine_a3e87828e64b7ab5dbf36020b81f3770d} 
+\mbox{\hyperlink{classState}{State}} \texorpdfstring{$\ast$}{*} {\bfseries states} \mbox{[}STATES\+\_\+\+LEN\mbox{]}
+\item 
+\Hypertarget{classStateMachine_ae6cece77b5093247a26b6b546f220171}\label{classStateMachine_ae6cece77b5093247a26b6b546f220171} 
+\mbox{\hyperlink{classState}{State}} \texorpdfstring{$\ast$}{*} {\bfseries current}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrizione dettagliata}
+Implentazione di una macchina a stati minimalista
+
+Controlla gli stati del gioco e ne facilita il cambio al verificarsi di certi eventi. Permette gestire meglio le interazioni tra i vari stati. 
+
+\doxysubsection{Documentazione dei costruttori e dei distruttori}
+\Hypertarget{classStateMachine_a093e964bd1e5caf4ab869e66c856bcea}\index{StateMachine@{StateMachine}!StateMachine@{StateMachine}}
+\index{StateMachine@{StateMachine}!StateMachine@{StateMachine}}
+\doxysubsubsection{\texorpdfstring{StateMachine()}{StateMachine()}}
+{\footnotesize\ttfamily \label{classStateMachine_a093e964bd1e5caf4ab869e66c856bcea} 
+State\+Machine\+::\+State\+Machine (\begin{DoxyParamCaption}\item[{state}]{start}{}\end{DoxyParamCaption})}
+
+
+
+Costruttore della classe. 
+
+Costruttore della classe \doxylink{classStateMachine}{State\+Machine} 
+\begin{DoxyParams}{Parametri}
+{\em start} & Lo stato con cui partirà il gioco \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Documentazione delle funzioni membro}
+\Hypertarget{classStateMachine_a3e815fc564dae487ea3df32c9bde0e4c}\index{StateMachine@{StateMachine}!flip@{flip}}
+\index{flip@{flip}!StateMachine@{StateMachine}}
+\doxysubsubsection{\texorpdfstring{flip()}{flip()}}
+{\footnotesize\ttfamily \label{classStateMachine_a3e815fc564dae487ea3df32c9bde0e4c} 
+void State\+Machine\+::flip (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Cambia stato di gioco. 
+
+Cambia lo stato attuale del gioco \Hypertarget{classStateMachine_a422e12d68b423c9f9511420b077a028b}\index{StateMachine@{StateMachine}!game\_loop@{game\_loop}}
+\index{game\_loop@{game\_loop}!StateMachine@{StateMachine}}
+\doxysubsubsection{\texorpdfstring{game\_loop()}{game\_loop()}}
+{\footnotesize\ttfamily \label{classStateMachine_a422e12d68b423c9f9511420b077a028b} 
+void State\+Machine\+::game\+\_\+loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Ciclo principale del gioco. 
+
+Fa partire il gioco intero attraverso un loop infinito \Hypertarget{classStateMachine_a4021e0f465b06dbee395cb3ace2bd698}\index{StateMachine@{StateMachine}!init\_ncurses@{init\_ncurses}}
+\index{init\_ncurses@{init\_ncurses}!StateMachine@{StateMachine}}
+\doxysubsubsection{\texorpdfstring{init\_ncurses()}{init\_ncurses()}}
+{\footnotesize\ttfamily \label{classStateMachine_a4021e0f465b06dbee395cb3ace2bd698} 
+void State\+Machine\+::init\+\_\+ncurses (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza le funzioni di ncurses. 
+
+Inizializza tutte le funzioni di ncurses necessarie \Hypertarget{classStateMachine_a47c6185a26f0725e947bf09872965481}\index{StateMachine@{StateMachine}!update@{update}}
+\index{update@{update}!StateMachine@{StateMachine}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classStateMachine_a47c6185a26f0725e947bf09872965481} 
+void State\+Machine\+::update (\begin{DoxyParamCaption}\item[{int}]{input}{}\end{DoxyParamCaption})}
+
+
+
+Aggiorna lo stato attuale. 
+
+Aggiorna lo stato attuale e controlla che non ci sia bisogno di cambiarlo 
+
+La documentazione per questa classe è stata generata a partire dai seguenti file\+:\begin{DoxyCompactItemize}
+\item 
+include/state\+\_\+machine/state\+\_\+machine.\+hpp\item 
+include/state\+\_\+machine/state\+\_\+machine.\+cpp\end{DoxyCompactItemize}

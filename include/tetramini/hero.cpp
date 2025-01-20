@@ -1,11 +1,22 @@
 #include "hero.hpp"
 
+/**
+ * Costruttore della classe
+ * @param world il mondo in cui esisterà il tetramino
+ */
 Hero::Hero(World world): Tetramino(world, 4, 4) {}
 
+/**
+ * Stampa il tetramino nel suo frame attuale
+ */
 void Hero::print_frame() {
 	Tetramino::print(frames[current]);
 }
 
+/**
+ * Muove il tetramino in modo che non strabordi fuori dal mondo
+ * @param dir positiva se a destra negativa altrimenti
+ */
 void Hero::safe_move(int dir) {
 	if(!side_collisions()) {
 		int l_limit = (dir<0) * (XOFF - (current * 2) + 1);
@@ -16,6 +27,9 @@ void Hero::safe_move(int dir) {
 	}
 }
 
+/**
+ * Ruota il tetramino di mezzo angolo giro
+ */
 void Hero::rotate() {
 	werase(base);
 
@@ -32,6 +46,9 @@ void Hero::rotate() {
 	wrefresh(base);
 }
 
+/**
+ * Controllo se ci sono ostacoli ai lati del tetramino
+ */
 int Hero::side_collisions() {
 	int coll = 0;
 	if(current) {

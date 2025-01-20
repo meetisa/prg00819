@@ -1,11 +1,15 @@
 #include "menu.hpp"
 
+/**
+ * Costruttore della classe
+ */
 Menu::Menu() : State() {
 	CRS_YOFF = TEXT_YOFF+1;
 	CRS_X = TEXT_XOFF/2;
 
 	options.init(
-		"Nuova partita\nClassifica\nEsci", // lista divisa da \n
+		"Nuova partita@\nClassifica@\nEsci@", // lista divisa da \n
+		'0', //
 		ROW_SPACING, // spazio tra le righe
 		TEXT_XOFF, // offset della x
 		TEXT_YOFF, // offset della y
@@ -14,6 +18,9 @@ Menu::Menu() : State() {
 	options.setInCenter();
 }
 
+/**
+ * Stampa la finestra con il cursore e le opzioni
+ */
 void Menu::draw() {
 	options.show_list();
 
@@ -24,6 +31,14 @@ void Menu::draw() {
 	wattroff(options.win, A_BOLD);
 }
 
+/**
+ * Funzione che fa interagire l'utente con lo stato
+ * in base all'input
+ *
+ * In questo caso la funzione serve a far muovere l'utente
+ * con il cursore e farlo scegliere un'opzione
+ * @param input il tasto che preme l'utente
+ */
 int Menu::update(int input) {
 
 	int len = options.get_len();
@@ -61,8 +76,7 @@ int Menu::update(int input) {
 			Quit();
 
 		setDone(1);
-		werase(options.win);
-		delwin(options.win);
+		options.destroy();
 	}
 
 	return 0;

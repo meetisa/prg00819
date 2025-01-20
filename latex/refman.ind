@@ -1,0 +1,238 @@
+\begin{theindex}
+
+  \item {addPlayer}
+    \subitem {Classifica}, \hyperpage{10}
+
+  \indexspace
+
+  \item {check\_collision}
+    \subitem {Tetramino}, \hyperpage{33}
+  \item {checkfullrow}
+    \subitem {World}, \hyperpage{36}
+  \item {Classifica}, \hyperpage{9}
+    \subitem {addPlayer}, \hyperpage{10}
+    \subitem {Classifica}, \hyperpage{10}
+    \subitem {display}, \hyperpage{10}
+    \subitem {get\_new\_name}, \hyperpage{11}
+    \subitem {insertPlayer}, \hyperpage{11}
+    \subitem {update}, \hyperpage{11}
+  \item {compute\_sizes}
+    \subitem {List}, \hyperpage{16}
+
+  \indexspace
+
+  \item {destroy}
+    \subitem {Screen}, \hyperpage{23}
+  \item {dies}
+    \subitem {Tetramino}, \hyperpage{33}
+  \item {display}
+    \subitem {Classifica}, \hyperpage{10}
+  \item {draw}
+    \subitem {Menu}, \hyperpage{19}
+    \subitem {World}, \hyperpage{36}
+
+  \indexspace
+
+  \item {f}, \hyperpage{12}
+  \item {falling}
+    \subitem {Tetramino}, \hyperpage{33}
+  \item {flip}
+    \subitem {StateMachine}, \hyperpage{30}
+  \item {frames}
+    \subitem {Hero}, \hyperpage{15}
+
+  \indexspace
+
+  \item {game\_loop}
+    \subitem {StateMachine}, \hyperpage{30}
+  \item {gameOver}
+    \subitem {Partita}, \hyperpage{21}
+  \item {gameplay}
+    \subitem {Partita}, \hyperpage{21}
+  \item {get\_len}
+    \subitem {List}, \hyperpage{16}
+  \item {get\_new\_name}
+    \subitem {Classifica}, \hyperpage{11}
+  \item {getclout}
+    \subitem {Tetramino}, \hyperpage{33}
+  \item {getNext}
+    \subitem {State}, \hyperpage{28}
+  \item {getQuit}
+    \subitem {State}, \hyperpage{28}
+  \item {getspecs}
+    \subitem {World}, \hyperpage{36}
+
+  \indexspace
+
+  \item {Hero}, \hyperpage{12}
+    \subitem {frames}, \hyperpage{15}
+    \subitem {Hero}, \hyperpage{13}
+    \subitem {print\_frame}, \hyperpage{14}
+    \subitem {rotate}, \hyperpage{14}
+    \subitem {safe\_move}, \hyperpage{14}
+    \subitem {side\_collisions}, \hyperpage{14}
+
+  \indexspace
+
+  \item {include/state\_machine/state.hpp}, \hyperpage{39}
+  \item {include/state\_machine/state\_machine.hpp}, \hyperpage{39}
+  \item {include/states/classifica.hpp}, \hyperpage{40}
+  \item {include/states/gameplay.hpp}, \hyperpage{41}
+  \item {include/states/menu.hpp}, \hyperpage{41}
+  \item {include/states/screen.hpp}, \hyperpage{42}
+  \item {include/states/world.hpp}, \hyperpage{42}
+  \item {include/tetramini/hero.hpp}, \hyperpage{43}
+  \item {include/tetramini/smashboy.hpp}, \hyperpage{44}
+  \item {include/tetramini/tetramini.hpp}, \hyperpage{44}
+  \item {init}
+    \subitem {List}, \hyperpage{17}
+    \subitem {Screen}, \hyperpage{23}
+  \item {init\_ncurses}
+    \subitem {StateMachine}, \hyperpage{31}
+  \item {insertPlayer}
+    \subitem {Classifica}, \hyperpage{11}
+  \item {isDone}
+    \subitem {State}, \hyperpage{28}
+
+  \indexspace
+
+  \item {List}, \hyperpage{15}
+    \subitem {compute\_sizes}, \hyperpage{16}
+    \subitem {get\_len}, \hyperpage{16}
+    \subitem {init}, \hyperpage{17}
+    \subitem {show\_list}, \hyperpage{17}
+    \subitem {update\_list}, \hyperpage{17}
+
+  \indexspace
+
+  \item {Menu}, \hyperpage{18}
+    \subitem {draw}, \hyperpage{19}
+    \subitem {Menu}, \hyperpage{19}
+    \subitem {update}, \hyperpage{19}
+  \item {move}
+    \subitem {Tetramino}, \hyperpage{33}
+
+  \indexspace
+
+  \item {node}, \hyperpage{20}
+
+  \indexspace
+
+  \item {Partita}, \hyperpage{20}
+    \subitem {gameOver}, \hyperpage{21}
+    \subitem {gameplay}, \hyperpage{21}
+    \subitem {Partita}, \hyperpage{21}
+    \subitem {update}, \hyperpage{22}
+  \item {pnode}, \hyperpage{22}
+  \item {pos\_to\_coords}
+    \subitem {World}, \hyperpage{36}
+  \item {prg00819}, \hyperpage{1}
+  \item {print}
+    \subitem {Tetramino}, \hyperpage{34}
+  \item {print\_frame}
+    \subitem {Hero}, \hyperpage{14}
+    \subitem {Smashboy}, \hyperpage{26}
+    \subitem {Tetramino}, \hyperpage{34}
+
+  \indexspace
+
+  \item {Quit}
+    \subitem {State}, \hyperpage{28}
+
+  \indexspace
+
+  \item {rotate}
+    \subitem {Hero}, \hyperpage{14}
+    \subitem {Smashboy}, \hyperpage{26}
+    \subitem {Tetramino}, \hyperpage{34}
+
+  \indexspace
+
+  \item {safe\_move}
+    \subitem {Hero}, \hyperpage{14}
+    \subitem {Smashboy}, \hyperpage{26}
+    \subitem {Tetramino}, \hyperpage{34}
+  \item {scan}
+    \subitem {World}, \hyperpage{37}
+  \item {Screen}, \hyperpage{23}
+    \subitem {destroy}, \hyperpage{23}
+    \subitem {init}, \hyperpage{23}
+    \subitem {setInCenter}, \hyperpage{24}
+    \subitem {show}, \hyperpage{24}
+  \item {setDone}
+    \subitem {State}, \hyperpage{28}
+  \item {setInCenter}
+    \subitem {Screen}, \hyperpage{24}
+  \item {setNext}
+    \subitem {State}, \hyperpage{29}
+  \item {setPrev}
+    \subitem {State}, \hyperpage{29}
+  \item {show}
+    \subitem {Screen}, \hyperpage{24}
+  \item {show\_list}
+    \subitem {List}, \hyperpage{17}
+  \item {side\_collisions}
+    \subitem {Hero}, \hyperpage{14}
+  \item {Smashboy}, \hyperpage{24}
+    \subitem {print\_frame}, \hyperpage{26}
+    \subitem {rotate}, \hyperpage{26}
+    \subitem {safe\_move}, \hyperpage{26}
+    \subitem {Smashboy}, \hyperpage{26}
+  \item {State}, \hyperpage{27}
+    \subitem {getNext}, \hyperpage{28}
+    \subitem {getQuit}, \hyperpage{28}
+    \subitem {isDone}, \hyperpage{28}
+    \subitem {Quit}, \hyperpage{28}
+    \subitem {setDone}, \hyperpage{28}
+    \subitem {setNext}, \hyperpage{29}
+    \subitem {setPrev}, \hyperpage{29}
+    \subitem {update}, \hyperpage{29}
+  \item {StateMachine}, \hyperpage{29}
+    \subitem {flip}, \hyperpage{30}
+    \subitem {game\_loop}, \hyperpage{30}
+    \subitem {init\_ncurses}, \hyperpage{31}
+    \subitem {StateMachine}, \hyperpage{30}
+    \subitem {update}, \hyperpage{31}
+
+  \indexspace
+
+  \item {Tetramino}, \hyperpage{31}
+    \subitem {check\_collision}, \hyperpage{33}
+    \subitem {dies}, \hyperpage{33}
+    \subitem {falling}, \hyperpage{33}
+    \subitem {getclout}, \hyperpage{33}
+    \subitem {move}, \hyperpage{33}
+    \subitem {print}, \hyperpage{34}
+    \subitem {print\_frame}, \hyperpage{34}
+    \subitem {rotate}, \hyperpage{34}
+    \subitem {safe\_move}, \hyperpage{34}
+    \subitem {Tetramino}, \hyperpage{32}
+
+  \indexspace
+
+  \item {update}
+    \subitem {Classifica}, \hyperpage{11}
+    \subitem {Menu}, \hyperpage{19}
+    \subitem {Partita}, \hyperpage{22}
+    \subitem {State}, \hyperpage{29}
+    \subitem {StateMachine}, \hyperpage{31}
+  \item {update\_list}
+    \subitem {List}, \hyperpage{17}
+  \item {update\_points}
+    \subitem {World}, \hyperpage{37}
+  \item {update\_screen}
+    \subitem {World}, \hyperpage{37}
+
+  \indexspace
+
+  \item {World}, \hyperpage{35}
+    \subitem {checkfullrow}, \hyperpage{36}
+    \subitem {draw}, \hyperpage{36}
+    \subitem {getspecs}, \hyperpage{36}
+    \subitem {pos\_to\_coords}, \hyperpage{36}
+    \subitem {scan}, \hyperpage{37}
+    \subitem {update\_points}, \hyperpage{37}
+    \subitem {update\_screen}, \hyperpage{37}
+    \subitem {World}, \hyperpage{35}
+
+\end{theindex}

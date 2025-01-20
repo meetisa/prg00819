@@ -1,0 +1,40 @@
+\doxysection{state\+\_\+machine.\+hpp}
+\hypertarget{state__machine_8hpp_source}{}\label{state__machine_8hpp_source}\index{include/state\_machine/state\_machine.hpp@{include/state\_machine/state\_machine.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ STATE\_MACHINE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ STATE\_MACHINE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <ncurses.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}state.hpp"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../states/menu.hpp"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../states/gameplay.hpp"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../states/classifica.hpp"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classStateMachine_a093e964bd1e5caf4ab869e66c856bcea}{StateMachine}}\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ done\ =\ 0;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ state\ current\_state;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classState}{State}}\ *states[STATES\_LEN];}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classState}{State}}\ *current;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classStateMachine_a093e964bd1e5caf4ab869e66c856bcea}{StateMachine}}(state\ start);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classStateMachine_a4021e0f465b06dbee395cb3ace2bd698}{init\_ncurses}}();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classStateMachine_a3e815fc564dae487ea3df32c9bde0e4c}{flip}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classStateMachine_a47c6185a26f0725e947bf09872965481}{update}}(\textcolor{keywordtype}{int}\ input);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classStateMachine_a422e12d68b423c9f9511420b077a028b}{game\_loop}}();}
+\DoxyCodeLine{00043\ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

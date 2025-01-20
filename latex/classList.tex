@@ -1,0 +1,152 @@
+\doxysection{Riferimenti per la classe List}
+\hypertarget{classList}{}\label{classList}\index{List@{List}}
+
+
+{\ttfamily \#include $<$screen.\+hpp$>$}
+
+Diagramma delle classi per List\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classList}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classList_a64d878a92d11f7c63c70cbe4e7dd4176}\label{classList_a64d878a92d11f7c63c70cbe4e7dd4176} 
+{\bfseries List} ()
+\begin{DoxyCompactList}\small\item\em Costruttore della classe. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classList_ab8bc94997e88983f77c37a3de7579fd1}{init}} (char text\mbox{[}$\,$\mbox{]}, char delimiter, int r\+\_\+s, int txt\+\_\+xoff, int txt\+\_\+yoff, char borders\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Inizializza la finestra. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classList_aba6bc20c48c2269ff2624e625c4e93ad}{compute\+\_\+sizes}} (int \texorpdfstring{$\ast$}{*}width, int \texorpdfstring{$\ast$}{*}height)
+\begin{DoxyCompactList}\small\item\em Aggiorna larghezza e altezza. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classList_a7b4c670bec32674e7cb4caac73004ae4}{update\+\_\+list}} (char new\+\_\+text\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Aggiorna la lista di stringhe da stampare. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classList_af1f31de3470f53c599bd88f3e5cc28c9}{show\+\_\+list}} ()
+\begin{DoxyCompactList}\small\item\em Stampa la finestra e la lista di stringhe. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classList_a09c6d44af277d231b645211032869d9a}{get\+\_\+len}} ()
+\begin{DoxyCompactList}\small\item\em Fa sapere la lunghezza della lista di stringhe. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Membri pubblici ereditati da \mbox{\hyperlink{classScreen}{Screen}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Screen} ()
+\begin{DoxyCompactList}\small\item\em Costruttore della classe. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classScreen_a45e2de1c34ac30bdbff8cd368829cb8b}{init}} (int w, int h, int stx, int sty, char borders\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Inizializza la finestra. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classScreen_ab96ccb5abf5c5e1d34acfe431f32a8ed}{set\+In\+Center}} ()
+\begin{DoxyCompactList}\small\item\em Centra la finestra nel terminale. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classScreen_a37c4aa696ff25a092a10d0d7da69fa2b}{show}} ()
+\begin{DoxyCompactList}\small\item\em Stampa la finestra. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classScreen_a46dd9f3e5eb38e3cd248844f116876aa}{destroy}} ()
+\begin{DoxyCompactList}\small\item\em Cancella la finestra. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Altri membri ereditati}
+\doxysubsection*{Attributi pubblici ereditati da \mbox{\hyperlink{classScreen}{Screen}}}
+\begin{DoxyCompactItemize}
+\item 
+WINDOW \texorpdfstring{$\ast$}{*} {\bfseries win}
+\end{DoxyCompactItemize}
+\doxysubsection*{Attributi protetti ereditati da \mbox{\hyperlink{classScreen}{Screen}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries WIDTH}
+\item 
+int {\bfseries HEIGHT}
+\item 
+int {\bfseries STARTY}
+\item 
+int {\bfseries STARTX}
+\item 
+char {\bfseries BORDERS} \mbox{[}8\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrizione dettagliata}
+Classe figlia per le finestre che stampano una lista di stringhe 
+
+\doxysubsection{Documentazione delle funzioni membro}
+\Hypertarget{classList_aba6bc20c48c2269ff2624e625c4e93ad}\index{List@{List}!compute\_sizes@{compute\_sizes}}
+\index{compute\_sizes@{compute\_sizes}!List@{List}}
+\doxysubsubsection{\texorpdfstring{compute\_sizes()}{compute\_sizes()}}
+{\footnotesize\ttfamily \label{classList_aba6bc20c48c2269ff2624e625c4e93ad} 
+void List\+::compute\+\_\+sizes (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{width}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{height}{}\end{DoxyParamCaption})}
+
+
+
+Aggiorna larghezza e altezza. 
+
+In base alla lista di stringhe attuali calcola una nuova larghezza e altezza della finestra 
+\begin{DoxyParams}[1]{Parametri}
+\mbox{\texttt{ out}}  & {\em width} & la nuova larghezza \\
+\hline
+\mbox{\texttt{ out}}  & {\em height} & la nuova altezza \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classList_a09c6d44af277d231b645211032869d9a}\index{List@{List}!get\_len@{get\_len}}
+\index{get\_len@{get\_len}!List@{List}}
+\doxysubsubsection{\texorpdfstring{get\_len()}{get\_len()}}
+{\footnotesize\ttfamily \label{classList_a09c6d44af277d231b645211032869d9a} 
+void List\+::get\+\_\+len (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Fa sapere la lunghezza della lista di stringhe. 
+
+Fa sapere la lunghezza della lista di stringhe \begin{DoxyReturn}{Restituisce}
+la lunghezza della lista 
+\end{DoxyReturn}
+\Hypertarget{classList_ab8bc94997e88983f77c37a3de7579fd1}\index{List@{List}!init@{init}}
+\index{init@{init}!List@{List}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \label{classList_ab8bc94997e88983f77c37a3de7579fd1} 
+void List\+::init (\begin{DoxyParamCaption}\item[{char}]{text}{\mbox{[}$\,$\mbox{]}, }\item[{char}]{delimiter}{, }\item[{int}]{r\+\_\+s}{, }\item[{int}]{txt\+\_\+xoff}{, }\item[{int}]{txt\+\_\+yoff}{, }\item[{char}]{borders}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Inizializza la finestra. 
+
+Inizializza tutte le proprietà principali della classe 
+\begin{DoxyParams}{Parametri}
+{\em text\mbox{[}$\,$\mbox{]}} & la lista di stringhe iniziali da stampare \\
+\hline
+{\em delimiter} & il carattere che dice quando una stringa è finita \\
+\hline
+{\em r\+\_\+s} & quante righe vuote tra una stringa e l\textquotesingle{}altra \\
+\hline
+{\em txt\+\_\+xoff} & quanto spazio tra i bordi verticali \\
+\hline
+{\em txt\+\_\+yoff} & quanto spazio tra i bordi orizzontali \\
+\hline
+{\em borders} & stringa di 8 caratteri che sono i bordi della finestra \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classList_af1f31de3470f53c599bd88f3e5cc28c9}\index{List@{List}!show\_list@{show\_list}}
+\index{show\_list@{show\_list}!List@{List}}
+\doxysubsubsection{\texorpdfstring{show\_list()}{show\_list()}}
+{\footnotesize\ttfamily \label{classList_af1f31de3470f53c599bd88f3e5cc28c9} 
+void List\+::show\+\_\+list (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stampa la finestra e la lista di stringhe. 
+
+Stampa la finestra e la lista di stringhe \Hypertarget{classList_a7b4c670bec32674e7cb4caac73004ae4}\index{List@{List}!update\_list@{update\_list}}
+\index{update\_list@{update\_list}!List@{List}}
+\doxysubsubsection{\texorpdfstring{update\_list()}{update\_list()}}
+{\footnotesize\ttfamily \label{classList_a7b4c670bec32674e7cb4caac73004ae4} 
+void List\+::update\+\_\+list (\begin{DoxyParamCaption}\item[{char}]{new\+\_\+text}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Aggiorna la lista di stringhe da stampare. 
+
+Aggiorna la lista di stringhe da stampare 
+\begin{DoxyParams}{Parametri}
+{\em new\+\_\+text\mbox{[}$\,$\mbox{]}} & la nuova lista di stringhe \\
+\hline
+\end{DoxyParams}
+
+
+La documentazione per questa classe è stata generata a partire dai seguenti file\+:\begin{DoxyCompactItemize}
+\item 
+include/states/screen.\+hpp\item 
+include/states/screen.\+cpp\end{DoxyCompactItemize}

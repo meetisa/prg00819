@@ -1,5 +1,11 @@
 #include "world.hpp"
 
+/**
+ * Costruttore della mondo di gioco
+ * @param w la larghezza del mondo
+ * @param h l'altezza del mondo
+ * @param xoff quanto a destra è spostato il mondo
+ */
 World::World(int w, int h, int xoff) {
 	SCRW = w;
 	SCRH = h;
@@ -20,17 +26,33 @@ World::World(int w, int h, int xoff) {
 	grid->next = NULL;
 }
 
+/**
+ * Per sapere le specifiche del mondo di gioco
+ * @param[out] w la larghezza del mondo
+ * @param[out] h l'altezza del mondo
+ * @param[out] xoff quanto è spostato a destra il mondo
+ */
 void World::getspecs(int *w, int *h, int *xoff) {
 	*w = SCRW;
 	*h = SCRH;
 	*xoff = XOFF;
 }
 
+/**
+ * Converte la posizione all'interno della griglia
+ * nelle coordinate effitive della finestra
+ * @param[in] la posizione nella griglia
+ * @param[out] ascissa nella finestra
+ * @param[out] ordinata nella finestra
+ */
 void World::pos_to_coords(int pos, int *x, int *y) {
 	*x = ((pos % GRIDW) * 2) + GRID_XOFF;
 	*y = (pos / GRIDW) + GRID_YOFF;
 }
 
+/**
+ * Stampa tutto il mondo nel terminale
+ */
 void World::draw() {
 	block *iter;
 	int pos=LEN-1, x, y, l=0;
@@ -44,6 +66,9 @@ void World::draw() {
 	}
 }
 
+/**
+ * Scannerizza tutto il mondo e aggiorna la griglia
+ */
 void World::scan() {
 	char ch;
 	int pos, x, y;
@@ -87,6 +112,11 @@ void World::scan() {
 	}
 }
 
+/**
+ * Controllare se ci sono righe piene nel mondo
+ * @returns i punti guadagnati per aver fatto quel numero
+ * di righe piene
+ */
 int World::checkfullrow() {
 	block *iter;
 	block *prev_row;
@@ -127,11 +157,18 @@ int World::checkfullrow() {
 	return points;
 }
 
+/**
+ * Aggiorna i bordi della finestra
+ */
 void World::update_screen() {
 	wborder(screen, '|', '|', '#', '#', '+', '+', '+', '+');
 	wrefresh(screen);
 }
 
+/**
+ * Aggiorna il punteggio a schermo
+ * @param p i nuovi punti
+ */
 void World::update_points(int p) {
 	wborder(points_scr, '|', '|', '-', '-', '+', '+', '+', '+');
 	mvwprintw(points_scr, 1, 1, "punteggio: %d", p);

@@ -1,127 +1,73 @@
 #include "classifica.hpp"
 
-// Classifica::Classifica() : State() {
-//
-// 	player *iter;
-// 	iter=head;
-//
-// 	ifile.open(filename);
-// 	char ch, pname[50], points[50];
-// 	int maxw, maxh, p, n=0;
-// 	int i_n=0, i_p=0;
-//
-// 	while(!ifile.eof()) {
-// 		ifile.get(ch);
-//
-// 		if(n)
-// 			points[i_p++] = ch;
-// 		else
-// 			pname[i_n++] = ch;
-//
-// 		if(n && ch == '\n') {
-// 			points[i_p] = '\0';
-// 			i_p=0;
-// 			n = 0;
-// 			p = atoi(points);
-//
-// 			iter->points = p;
-//
-// 			iter->next = new player;
-// 			iter->next->next = NULL;
-// 			iter = iter->next;
-// 		}
-//
-// 		if(ch == '@') {
-// 			pname[i_n-1] = '\0';
-// 			i_n=0;
-// 			n=1;
-// 			strcpy(iter->name, pname);
-// 		}
-//
-// 		length += ch == '\n';
-// 	}
-//
-// 	length--;
-//
-// 	ifile.close();
-//
-// 	WIDTH = 50;
-// 	/*
-// 	 * il +1 serve per avere una riga vuota
-// 	 * all'inizio e una alla fine (*2 +1),
-// 	 * mentre il +2 sono i bordi sopra e sotto
-// 	 */
-// 	HEIGHT = length * ROW_SPACING +1 +2;
-//
-// 	getmaxyx(stdscr, maxh, maxw);
-// 	STARTY = (maxh/2) - (HEIGHT/2);
-// 	STARTX = (maxw/2) - (WIDTH/2);
-//
-// 	win = newwin(HEIGHT, WIDTH, STARTY, STARTX);
-// }
-
+/**
+ * Costruttore della classe
+ */
 Classifica::Classifica() : State() {
-	int i=0, ch_len=0;
-	char ch;
-	ifile.open(filename);
-	while(!ifile.eof()) {
-		ifile.get(ch);
-		ch_len++;
-	}
-	players = new char[ch_len];
 
-	ifile.clear();
-	ifile.seekg(0);
+	setNext(MENU);
 
-	while(!ifile.eof()) {
-		ifile.get(players[i++]);
-	}
-	ifile.close();
-
-	players[ch_len-2] = '\0';
+	init_pair(1, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(2, COLOR_GREEN, COLOR_BLACK);
+	init_pair(3, COLOR_RED, COLOR_BLACK);
 
 	player *iter;
-	iter=head;
+	iter = head;
 
-	char pname[50], points[50];
-	int maxw, maxh, p, n=0;
-	int i_n=0, i_p=0;
+	int delimiter=0;
+	int i, j=0, line_len, p;
+	char ch, riga[100], tmp_name[100], tmp_points[100];
 
-	for(i=0; i<ch_len; i++) {
-		ch = players[i];
+	ifile.open(filename);
 
-		if(n)
-			points[i_p++] = ch;
-		else
-			pname[i_n++] = ch;
+	while(ifile.getline(riga, sizeof(riga), '\n')) {
 
-		if(n && ch == '\n') {
-			points[i_p] = '\0';
-			i_p=0;
-			n = 0;
-			p = atoi(points);
+		length++;
+		line_len = strlen(riga);
+		total_len += line_len;
 
-			iter->points = p;
-
-			iter->next = new player;
-			iter->next->next = NULL;
-			iter = iter->next;
+		for(i=0; i<line_len; i++) {
+			if(riga[i] == splitter) {
+				delimiter = 1;
+				tmp_name[i] = '\0';
+			}
+			else if(!delimiter)
+				tmp_name[i] = riga[i];
+			else
+				tmp_points[j++] = riga[i];
 		}
 
-		if(ch == '@') {
-			pname[i_n-1] = '\0';
-			i_n=0;
-			n=1;
-			strcpy(iter->name, pname);
-		}
+		tmp_points[j] = '\0';
 
-		length += ch == '\n';
+		strcpy(iter->all, riga);
+		strcpy(iter->name, tmp_name);
+		iter->points = atoi(tmp_points);
+
+		iter->next = new player;
+		iter->next->next = NULL;
+		iter = iter->next;
+
+		delimiter = 0;
+		j = 0;
+
 	}
 
-	length--;
+	ifile.close();
+
+	j=0;
+	all_players = new char[total_len + length];
+
+	for(iter=head; iter!=NULL; iter=iter->next) {
+		for(i=0; i<strlen(iter->all); i++)
+			all_players[j++] = iter->all[i];
+		all_players[j++] = '\n';
+	}
+
+	all_players[j-2] = '\0';
 
 	chart.init(
-		players,
+		all_players,
+		'@',
 		ROW_SPACING,
 		TEXT_XOFF,
 		TEXT_YOFF,
@@ -130,60 +76,116 @@ Classifica::Classifica() : State() {
 	chart.setInCenter();
 }
 
+/**
+ * Stampa la classifica nel terminale
+ */
 void Classifica::display() {
+	int pair = 1;
+	wattron(chart.win, COLOR_PAIR(pair));
 	chart.show_list();
+	wattroff(chart.win, COLOR_PAIR(pair));
 }
 
+/**
+ * Funzione in cui l'utente può interagire con lo stato
+ * @returns il tasto premuto dall'utente
+ */
 int Classifica::update(int input) {
-	//if(previous == MENU)
+	if(previous == MENU)
 		display();
+	else
+		addPlayer();
 
 	return 0;
 }
 
-// void Classifica::display() {
-// 	wborder(win, '|', '|', '-', '-', '+', '+', '+', '+');
-//
-// 	char ch;
-// 	int x=0, y=0;
-//
-// 	ifile.open(filename);
-//
-// 	while(!ifile.eof()) {
-// 		ifile.get(ch);
-//
-// 		if(ch == '\n') {
-// 			y++;
-// 			x = 0;
-// 		}
-// 		else
-// 			mvwprintw(win, TEXT_YOFF + y*2, TEXT_XOFF + x++, "%c", ch);
-// 	}
-//
-// 	ifile.close();
-//
-// 	wrefresh(win);
-// }
+/**
+ * Fa immetere all'utente il suo nome nel terminale
+ * @param new_name il nuovo nome utente
+ */
+void Classifica::get_new_name(char name[]) {
+	Screen insert_name;
 
-
-void Classifica::addPlayer() {
 	echo();
 
-	WINDOW *insert_name;
-	insert_name = newwin(3, 50, 3, 4);
-	wborder(insert_name, '|', '|', '-', '-', '+', '+', '+', '+');
+	insert_name.init(50, 3, 0, 0, "||--++++");
+	insert_name.setInCenter();
 
-	char name[50];
+	insert_name.show();
 
-	mvwscanw(insert_name, 1, 1, "%s", name);
-
-	wrefresh(insert_name);
+	mvwscanw(insert_name.win, 1, 1, "%s", name);
 
 	noecho();
 
-	char line[100];
+	insert_name.destroy();
+}
 
-	ifile.clear();
-	ifile.seekg(0);
-	getline(ifile, riga);
+/**
+ * Aggiunge un nuovo giocatore in classifica
+ */
+void Classifica::addPlayer() {
+
+	player *iter;
+	char name[50];
+	get_new_name(name);
+
+	char line[100];
+	int p, i=0;
+
+	ifile.open(filename);
+	while(ifile.getline(line, sizeof(line))) {
+		i++;
+		if(i >= length)
+			p = atoi(line);
+	}
+	ifile.close();
+
+	insertPlayer(name, p);
+
+	ofile.open(filename);
+	for(iter=head; iter->next!=NULL; iter=iter->next) {
+		ofile << iter->name << '@' << iter->points << '@' << endl;
+	}
+	ofile.close();
+
+	i=0;
+	all_players = new char[999999];
+
+	ifile.open(filename);
+	while(!ifile.eof())
+		ifile.get(all_players[i++]);
+	ifile.close();
+	all_players[i-2] = '\0';
+
+	chart.update_list(all_players);
+	chart.setInCenter();
+
+	setDone(1);
+}
+
+/**
+ * Inserisce un utente nella lista concatenata
+ */
+void Classifica::insertPlayer(char name[], int points) {
+	player *tmp, *iter;
+	char str_points[100];
+
+	tmp = new player;
+	strcpy(tmp->name, name);
+	tmp->points = points;
+
+	sprintf(tmp->all, "%s@%d", name, points);
+
+	if(points >= head->points) {
+		tmp->next = head;
+		head = tmp;
+	}
+	else {
+		for(iter=head; iter->next!=NULL; iter=iter->next) {
+			if(points < iter->points && points > iter->next->points) {
+				tmp->next = iter->next;
+				iter->next = tmp;
+			}
+		}
+	}
 }

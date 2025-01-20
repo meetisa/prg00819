@@ -5,6 +5,9 @@
 
 #define X_OFFSET 2
 
+/**
+ * Costruttore della classe
+ */
 Partita::Partita() : State() {
 
 	setNext(CLASSIFICA);
@@ -28,13 +31,25 @@ Partita::Partita() : State() {
 		t = s;
 }
 
-
+/**
+ * Funzione per far interagire l'utente con lo stato di gioco
+ * @param input il tasto che preme l'utente
+ */
 int Partita::update(int input) {
-	gameOver();
-	// gameplay(input);
+	if(game_over)
+		gameOver();
+	else
+		gameplay(input);
+
 	return 0;
 }
 
+/**
+ * Fa procedere la partita e muove il tetramino
+ * secondo le regole del gioco
+ * @param input il tasto che preme l'utente
+ * @returns se la partita è finita o no
+ */
 int Partita::gameplay(int input) {
 
 	timer = (double) (clock() - tm) / velocity;
@@ -91,11 +106,20 @@ int Partita::gameplay(int input) {
 	 return -1;
 }
 
+/**
+ * In caso di game over bisogna aggiornare la classifica
+ */
 void Partita::gameOver() {
+	// time_t dt;
+	// time(&dt);
+	// struct tm *date;
+	// date = gmtime(&dt);
+
+	points = rand() % 5000;
 
 	fstream classifica;
 	classifica.open("classifica.txt", fstream::app);
-	classifica << points;
+	classifica << points; //<< '@' << date->tm_mday << '/' << date->tm_mon + 1 << '/' << date->tm_year;
 	classifica.close();
 
 	setDone(1);

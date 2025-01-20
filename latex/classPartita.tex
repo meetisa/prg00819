@@ -1,0 +1,126 @@
+\doxysection{Riferimenti per la classe Partita}
+\hypertarget{classPartita}{}\label{classPartita}\index{Partita@{Partita}}
+
+
+{\ttfamily \#include $<$gameplay.\+hpp$>$}
+
+Diagramma delle classi per Partita\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPartita}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPartita_a3ee8fe858b137e5a654a37882a863cb5}{Partita}} ()
+\begin{DoxyCompactList}\small\item\em Costruttore dello stato. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classPartita_a7bde7673a0acf29e2d5e9993e27fc4be}{update}} (int input)
+\begin{DoxyCompactList}\small\item\em Fa interagire il giocatore con il gioco. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classPartita_a2b8720e91347961b501e9ce7a577b0b6}{gameplay}} (int input)
+\begin{DoxyCompactList}\small\item\em Fa giocare l\textquotesingle{}utente a tetris. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPartita_a4fb215011680a5c93926e09badbcb37c}{game\+Over}} ()
+\begin{DoxyCompactList}\small\item\em Aggiorna la classifica in caso di game over. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Membri pubblici ereditati da \mbox{\hyperlink{classState}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries State} ()
+\begin{DoxyCompactList}\small\item\em Costruttore della classe. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classState_a10464dbede1d00121822f40e72070a1e}{set\+Done}} (int d)
+\begin{DoxyCompactList}\small\item\em Comunica che lo stato ha finito. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classState_a16af7ee3fa275fa4385576f345207936}{is\+Done}} ()
+\begin{DoxyCompactList}\small\item\em Controlla se lo staato ha finito. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classState_a7530a9c52e6b56ce5d8e4556ff92ca0e}{set\+Next}} (state n)
+\begin{DoxyCompactList}\small\item\em Decide quale sarà il prossimo stato. \end{DoxyCompactList}\item 
+state \mbox{\hyperlink{classState_a2dcd40d27fed8fd6da467d288e76d0e6}{get\+Next}} ()
+\begin{DoxyCompactList}\small\item\em Fa sapere il prossimo stato di gioco. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classState_a41cc1fada532c1b63e09a7011502b82a}{set\+Prev}} (state prev)
+\begin{DoxyCompactList}\small\item\em Decide lo stato precedente. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classState_a3dbb769d23356d9e616a80031702978e}{Quit}} ()
+\begin{DoxyCompactList}\small\item\em Esce definitivamente dal gioco. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classState_a10b7f23e95bf430c7fd31d4918b1f4fd}{get\+Quit}} ()
+\begin{DoxyCompactList}\small\item\em Fa sapere se bisogna uscire dal gioco. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Altri membri ereditati}
+\doxysubsection*{Attributi protetti ereditati da \mbox{\hyperlink{classState}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries done} = 0
+\item 
+int {\bfseries quit} = 0
+\item 
+state {\bfseries next}
+\item 
+state {\bfseries previous}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrizione dettagliata}
+Stato di gioco in cui si gestisce la partita di tetris 
+
+\doxysubsection{Documentazione dei costruttori e dei distruttori}
+\Hypertarget{classPartita_a3ee8fe858b137e5a654a37882a863cb5}\index{Partita@{Partita}!Partita@{Partita}}
+\index{Partita@{Partita}!Partita@{Partita}}
+\doxysubsubsection{\texorpdfstring{Partita()}{Partita()}}
+{\footnotesize\ttfamily \label{classPartita_a3ee8fe858b137e5a654a37882a863cb5} 
+Partita\+::\+Partita (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Costruttore dello stato. 
+
+Costruttore della classe 
+
+\doxysubsection{Documentazione delle funzioni membro}
+\Hypertarget{classPartita_a4fb215011680a5c93926e09badbcb37c}\index{Partita@{Partita}!gameOver@{gameOver}}
+\index{gameOver@{gameOver}!Partita@{Partita}}
+\doxysubsubsection{\texorpdfstring{gameOver()}{gameOver()}}
+{\footnotesize\ttfamily \label{classPartita_a4fb215011680a5c93926e09badbcb37c} 
+void Partita\+::game\+Over (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Aggiorna la classifica in caso di game over. 
+
+In caso di game over bisogna aggiornare la classifica \Hypertarget{classPartita_a2b8720e91347961b501e9ce7a577b0b6}\index{Partita@{Partita}!gameplay@{gameplay}}
+\index{gameplay@{gameplay}!Partita@{Partita}}
+\doxysubsubsection{\texorpdfstring{gameplay()}{gameplay()}}
+{\footnotesize\ttfamily \label{classPartita_a2b8720e91347961b501e9ce7a577b0b6} 
+int Partita\+::gameplay (\begin{DoxyParamCaption}\item[{int}]{input}{}\end{DoxyParamCaption})}
+
+
+
+Fa giocare l\textquotesingle{}utente a tetris. 
+
+Fa procedere la partita e muove il tetramino secondo le regole del gioco 
+\begin{DoxyParams}{Parametri}
+{\em input} & il tasto che preme l\textquotesingle{}utente \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+se la partita è finita o no 
+\end{DoxyReturn}
+\Hypertarget{classPartita_a7bde7673a0acf29e2d5e9993e27fc4be}\index{Partita@{Partita}!update@{update}}
+\index{update@{update}!Partita@{Partita}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classPartita_a7bde7673a0acf29e2d5e9993e27fc4be} 
+int Partita\+::update (\begin{DoxyParamCaption}\item[{int}]{input}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Fa interagire il giocatore con il gioco. 
+
+Funzione per far interagire l\textquotesingle{}utente con lo stato di gioco 
+\begin{DoxyParams}{Parametri}
+{\em input} & il tasto che preme l\textquotesingle{}utente \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \mbox{\hyperlink{classState_a79efe26d7d885c0d4f2f2d92ec6d1409}{State}}.
+
+
+
+La documentazione per questa classe è stata generata a partire dai seguenti file\+:\begin{DoxyCompactItemize}
+\item 
+include/states/gameplay.\+hpp\item 
+include/states/gameplay.\+cpp\end{DoxyCompactItemize}

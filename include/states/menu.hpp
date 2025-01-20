@@ -2,16 +2,20 @@
 #define MENU_HPP
 
 #include <ncurses.h>
-#include "../state_machine/abstract_state.hpp"
+#include "../state_machine/state.hpp"
 #include "screen.hpp"
 
+/**
+ * Stato di gioco inizile, in cui l'utente deve scegliere
+ * tra iniziare una nuova partita e il vedere la classifica
+ */
 class Menu : public State {
 	private:
 		int ROW_SPACING = 2;
 
 		List options;
 
-		int TEXT_XOFF = 6;
+		int TEXT_XOFF = 3;
 		int TEXT_YOFF = 1;
 
 		const char CRS_CH = '>';
@@ -21,10 +25,13 @@ class Menu : public State {
 		int cursor = 0;
 
 	public:
+		/// Costruttore dello stato
 		Menu();
 
+		/// Stampa le opzioni con il cursore
 		void draw();
 
+		/// Fa interagire il giocatore con le opzioni
 		int update(int input);
 };
 

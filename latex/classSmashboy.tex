@@ -1,0 +1,146 @@
+\doxysection{Riferimenti per la classe Smashboy}
+\hypertarget{classSmashboy}{}\label{classSmashboy}\index{Smashboy@{Smashboy}}
+
+
+{\ttfamily \#include $<$smashboy.\+hpp$>$}
+
+Diagramma delle classi per Smashboy\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSmashboy}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSmashboy_a28769107801bf34e0fa88cebfcead131}{Smashboy}} (\mbox{\hyperlink{classWorld}{World}} world)
+\begin{DoxyCompactList}\small\item\em Costruttore del tetramino. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSmashboy_a86514a876aab2d4748405b62d37275ce}{print\+\_\+frame}} ()
+\begin{DoxyCompactList}\small\item\em Stampa il tetramino nel suo frame attuale. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSmashboy_a0902de1a8e39482a3f6a935153252fe5}{safe\+\_\+move}} (int dir)
+\begin{DoxyCompactList}\small\item\em Muove il tetramino senza farlo uscire dal mondo. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSmashboy_a9dc7c542a7be85cb0f624b840bd775b5}{rotate}} ()
+\begin{DoxyCompactList}\small\item\em Ruota il tetramino di zero gradi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Membri pubblici ereditati da \mbox{\hyperlink{classTetramino}{Tetramino}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTetramino_a12cd97a6e90603fecee9d75c88d9f446}{Tetramino}} (\mbox{\hyperlink{classWorld}{World}} world, int w, int h)
+\begin{DoxyCompactList}\small\item\em Costruttore della classe. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTetramino_a27f1fe8794c144968a505733338060dc}{print}} (int shape)
+\begin{DoxyCompactList}\small\item\em Stampa il tetramino nel terminale. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTetramino_a35049740c8e19cd23462043d7a3ceaaa}{move}} (int dir)
+\begin{DoxyCompactList}\small\item\em Muove in tetramino a destra o a sinistra. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classTetramino_a93e7b5d7e905f34fd049917d4f525ae9}{falling}} ()
+\begin{DoxyCompactList}\small\item\em Simulazione della caduta del tetramino. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTetramino_aeadcbf5778ae83526b880888fd8f61e0}{dies}} ()
+\begin{DoxyCompactList}\small\item\em Morte del tetramino. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classTetramino_a8d436ea7eace0e781a2f6cf7a053dbf1}{check\+\_\+collision}} ()
+\begin{DoxyCompactList}\small\item\em Controlla le collisioni del tetramino. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTetramino_a4a58b45d7c74c134e84d815b95d3ac6e}{getclout}} (int row, char \texorpdfstring{$\ast$}{*}buffer)
+\begin{DoxyCompactList}\small\item\em Fa sapere il contenuto di una riga del tetramino. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Attributi protetti}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classSmashboy_ab3d8517e49cd8565be31ba8f42f56e6b}\label{classSmashboy_ab3d8517e49cd8565be31ba8f42f56e6b} 
+int {\bfseries frame} = 15
+\end{DoxyCompactItemize}
+\doxysubsection*{Attributi protetti ereditati da \mbox{\hyperlink{classTetramino}{Tetramino}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries SCRW}
+\item 
+int {\bfseries SCRH}
+\item 
+int {\bfseries XOFF}
+\item 
+int {\bfseries WIDTH}
+\item 
+int {\bfseries HEIGHT}
+\item 
+int {\bfseries STARTX} =20
+\item 
+int {\bfseries STARTY} =1
+\item 
+int {\bfseries x}
+\item 
+int {\bfseries y}
+\item 
+WINDOW \texorpdfstring{$\ast$}{*} {\bfseries base}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrizione dettagliata}
+\doxylink{classTetramino}{Tetramino} di forma quadrata, chiamato con il nome originale 
+
+\doxysubsection{Documentazione dei costruttori e dei distruttori}
+\Hypertarget{classSmashboy_a28769107801bf34e0fa88cebfcead131}\index{Smashboy@{Smashboy}!Smashboy@{Smashboy}}
+\index{Smashboy@{Smashboy}!Smashboy@{Smashboy}}
+\doxysubsubsection{\texorpdfstring{Smashboy()}{Smashboy()}}
+{\footnotesize\ttfamily \label{classSmashboy_a28769107801bf34e0fa88cebfcead131} 
+Smashboy\+::\+Smashboy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classWorld}{World}}}]{world}{}\end{DoxyParamCaption})}
+
+
+
+Costruttore del tetramino. 
+
+Costruttore della classe 
+\begin{DoxyParams}{Parametri}
+{\em world} & il mondo in cui esisterà il tetramino \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Documentazione delle funzioni membro}
+\Hypertarget{classSmashboy_a86514a876aab2d4748405b62d37275ce}\index{Smashboy@{Smashboy}!print\_frame@{print\_frame}}
+\index{print\_frame@{print\_frame}!Smashboy@{Smashboy}}
+\doxysubsubsection{\texorpdfstring{print\_frame()}{print\_frame()}}
+{\footnotesize\ttfamily \label{classSmashboy_a86514a876aab2d4748405b62d37275ce} 
+void Smashboy\+::print\+\_\+frame (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Stampa il tetramino nel suo frame attuale. 
+
+Strampa il tetraminino nel suo frame attuale 
+
+Implementa \mbox{\hyperlink{classTetramino_a89fc7c2de161bf1ea91a3aa5778e09a7}{Tetramino}}.
+
+\Hypertarget{classSmashboy_a9dc7c542a7be85cb0f624b840bd775b5}\index{Smashboy@{Smashboy}!rotate@{rotate}}
+\index{rotate@{rotate}!Smashboy@{Smashboy}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily \label{classSmashboy_a9dc7c542a7be85cb0f624b840bd775b5} 
+void Smashboy\+::rotate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Ruota il tetramino di zero gradi. 
+
+
+
+Implementa \mbox{\hyperlink{classTetramino_ab1dcdfe07117cb0ca939e83526517570}{Tetramino}}.
+
+\Hypertarget{classSmashboy_a0902de1a8e39482a3f6a935153252fe5}\index{Smashboy@{Smashboy}!safe\_move@{safe\_move}}
+\index{safe\_move@{safe\_move}!Smashboy@{Smashboy}}
+\doxysubsubsection{\texorpdfstring{safe\_move()}{safe\_move()}}
+{\footnotesize\ttfamily \label{classSmashboy_a0902de1a8e39482a3f6a935153252fe5} 
+void Smashboy\+::safe\+\_\+move (\begin{DoxyParamCaption}\item[{int}]{dir}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Muove il tetramino senza farlo uscire dal mondo. 
+
+Muove il tetramino senza farlo strabordare fuori dal mondo 
+\begin{DoxyParams}{Parametri}
+{\em dir} & positiva se a destra negativa altrimenti \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \mbox{\hyperlink{classTetramino_a6f1a5e95e5b83198a58ccd0608212943}{Tetramino}}.
+
+
+
+La documentazione per questa classe è stata generata a partire dai seguenti file\+:\begin{DoxyCompactItemize}
+\item 
+include/tetramini/smashboy.\+hpp\item 
+include/tetramini/smashboy.\+cpp\end{DoxyCompactItemize}

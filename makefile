@@ -10,7 +10,7 @@ ODIR = ./obj
 
 _OBJ = tetramini.o hero.o smashboy.o \
 	gameplay.o world.o menu.o classifica.o screen.o \
-	abstract_state.o abstract_state-machine.o
+	state.o state_machine.o
 OBJ = $(patsubst %,  $(ODIR)/%, $(_OBJ))
 
 FLAGS=-lncurses -I/$(TETR_DIR) -I/$(STATES_DIR) -Wall -Wextra -g
@@ -29,7 +29,10 @@ $(ODIR)/%.o: $(TETR_DIR)/%.cpp $(TETR_DIR)/%.hpp
 
 # main
 tetris: tetris.cpp $(OBJ)
-	$(CMP) -o $@ $^ $(FLAGS) && ./$@
+	$(CMP) -o $@ $^ $(FLAGS) #&& ./$@
+
+doc: ./doc/doc.tex
+	pdflatex ./doc/doc.tex
 #
 # t: t.cpp
 # 	$(CMP) -o $@ $^ -lncurses $(FLAGS)

@@ -3,12 +3,20 @@
 
 #include <ncurses.h>
 
+/**
+ * Lista concatenata
+ * rappresenta un singolo blocco di tetris
+ */
 typedef struct node {
 	node *next;
 	int val;
 	int row_blocks;
 } block;
 
+/**
+ * Il mondo di tetris che gestisce le interazioni tra
+ * tetramino e l'esterno
+ */
 class World {
 	private:
 		//dimensioni dello schermo di gioco
@@ -47,18 +55,30 @@ class World {
 		block *grid;
 
 	public:
-		//costruttore
+		/// Costruttore della classe
 		World(int w, int h, int xoff);
 
+		/// Fa sapere le specifiche del mondo di gioco
 		void getspecs(int *w,  int *h, int *xoff);
+
+		/// Converte la posizione nella griglia in coordinate reali
 		void pos_to_coords(int pos, int *x, int *y);
 
-		void scan();
+		/// Stampa il mondo nel terminale
 		void draw();
+
+		/// Scannerizza tutto il mondo e aggiorna la griglia
+		void scan();
+
+		/// Controlla se ci sono righe piene
+		int checkfullrow();
+
+		/// Aggiorna la finestra
 		void update_screen();
+
+		/// Aggiorna il punteggio a schermo
 		void update_points(int p);
 
-		int checkfullrow();
 };
 
 #endif
