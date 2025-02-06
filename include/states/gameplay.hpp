@@ -10,7 +10,6 @@
 #include "../tetramini/hero.hpp"
 #include "../tetramini/smashboy.hpp"
 using namespace std;
-
 /**
  * Stato di gioco in cui si gestisce la partita di tetris
  */

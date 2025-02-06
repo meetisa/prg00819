@@ -59,9 +59,8 @@ class List : public Screen {
 		const char cols_d = '@';
 		const char rows_d = '\n';
 
-		int NFIELDS=0;
-
-		field *f;
+		int NFIELDS;
+		int *maxf;
 
 	public:
 
@@ -69,7 +68,7 @@ class List : public Screen {
 		List(){};
 
 		/// Inizializza la finestra
-		void init(char text[], char delimiter, int r_s, int txt_xoff, int txt_yoff, char borders[]);
+		void init(char text[],int r_s, int txt_xoff, int txt_yoff, char borders[]);
 
 		/// Aggiorna larghezza e altezza
 		void compute_sizes(int *width, int *height);

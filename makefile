@@ -29,7 +29,7 @@ $(ODIR)/%.o: $(TETR_DIR)/%.cpp $(TETR_DIR)/%.hpp
 
 # main
 tetris: tetris.cpp $(OBJ)
-	$(CMP) -o $@ $^ $(FLAGS) #&& ./$@
+	$(CMP) -o $@ $^ $(FLAGS)
 
 doc: ./doc/doc.tex
 	pdflatex ./doc/doc.tex

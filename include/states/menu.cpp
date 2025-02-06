@@ -5,11 +5,10 @@
  */
 Menu::Menu() : State() {
 	CRS_YOFF = TEXT_YOFF+1;
-	CRS_X = TEXT_XOFF/2;
+	CRS_X = (TEXT_XOFF/2);
 
 	options.init(
-		"Nuova partita@\nClassifica@\nEsci@", // lista divisa da \n
-		'0', //
+		"Nuova partita\nClassifica\nEsci", // lista divisa da \n
 		ROW_SPACING, // spazio tra le righe
 		TEXT_XOFF, // offset della x
 		TEXT_YOFF, // offset della y

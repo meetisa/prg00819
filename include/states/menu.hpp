@@ -15,7 +15,7 @@ class Menu : public State {
 
 		List options;
 
-		int TEXT_XOFF = 3;
+		int TEXT_XOFF = 4;
 		int TEXT_YOFF = 1;
 
 		const char CRS_CH = '>';

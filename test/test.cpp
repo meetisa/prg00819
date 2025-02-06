@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
 
 	date = gmtime(&dt);
 
-	cout << date->tm_mday << endl;
+	cout << date->tm_mday << '/' << date->tm_mon + 1 << '/' << date->tm_year + 1900 << endl;
 
 	return 0;
 }

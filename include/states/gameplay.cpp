@@ -16,7 +16,6 @@ Partita::Partita() : State() {
 
 	velocity = CLOCKS_PER_SEC / 10;
 
-
 	world = new World(SCREEN_WIDTH, LINES, X_OFFSET);
 	world->update_screen();
 	world->update_points(points);
@@ -110,16 +109,16 @@ int Partita::gameplay(int input) {
  * In caso di game over bisogna aggiornare la classifica
  */
 void Partita::gameOver() {
-	// time_t dt;
-	// time(&dt);
-	// struct tm *date;
-	// date = gmtime(&dt);
+	time_t dt;
+	time(&dt);
+	struct tm *date;
+	date = gmtime(&dt);
 
 	points = rand() % 5000;
 
 	fstream classifica;
 	classifica.open("classifica.txt", fstream::app);
-	classifica << points; //<< '@' << date->tm_mday << '/' << date->tm_mon + 1 << '/' << date->tm_year;
+	classifica << points << '@' << date->tm_mday << '/' << date->tm_mon + 1 << '/' << 1900 + date->tm_year;
 	classifica.close();
 
 	setDone(1);

@@ -160,39 +160,47 @@ int main() {
 	// ofstream ofile;
 	// ifstream ifile;
 
-	char cols_d = '@';
-	char rows_d = '\n';
-
-	// char s[] = "pippo@210@29/11@\nfranco@123@28/11@\nclaudio@45@23/11@\n";
-	char s[] = "1@1@1@\n22@22@22@\n333@333@333@\n";
-	//3 lunghezze di cui tener conto
-	int maxf[3], lenf[3];
-	for(int i=0; i<3; i++) {
-		maxf[i] = 0;
-		lenf[i] = 0;
-	}
-	int total_len = strlen(s);
-	int xt=0;
-	for(int i=0; i<total_len; i++) {
-		if(s[i] == cols_d) {
-			if(lenf[xt] > maxf[xt])
-				maxf[xt] = lenf[xt];
-			cout << lenf[xt] << " " << xt << "\t";
-			xt++;
-		}
-		else if(s[i] == rows_d) {
-			xt = 0;
-			for(int j=0; j<3; j++)
-				lenf[j] = 0;
-			cout << endl;
-		}
-		else
-			lenf[xt]++;
-	}
-	cout << endl;
-	for(int i=0; i<3; i++)
-		cout << maxf[i] << "\t";
-	cout << endl;
+	// char cols_d = '@';
+	// char rows_d = '\n';
+ //
+	// // char s[] = "pippo@210@29/11@\nfranco@123@28/11@\nclaudio@45@23/11@\n";
+	// char s[] = "Nuova partita@\nClassifica@\nEsci@\n";
+	// //3 lunghezze di cui tener conto
+ //
+	// int len=0, max=0;
+	// int maxf[3], lenf[3];
+	// for(int i=0; i<3; i++) {
+	// 	maxf[i] = 0;
+	// 	lenf[i] = 0;
+	// }
+	// int total_len = strlen(s);
+	// int xt=0;
+	// for(int i=0; i<total_len; i++) {
+	// 	if(s[i] == rows_d) {
+	// 		if(len > max)
+	// 			max = len;
+	// 		len = 0;
+	// 	}
+	// 	else {
+	// 		len += s[i] != cols_d;
+	// 	}
+	// 	// if(s[i] == cols_d) {
+	// 	// 	if(lenf[xt] > maxf[xt])
+	// 	// 		maxf[xt] = lenf[xt];
+	// 	// 	cout << lenf[xt] << " " << xt << "\t";
+	// 	// 	xt++;
+	// 	// }
+	// 	// else if(s[i] == rows_d) {
+	// 	// 	xt = 0;
+	// 	// 	for(int j=0; j<3; j++)
+	// 	// 		lenf[j] = 0;
+	// 	// 	cout << endl;
+	// 	// }
+	// 	// else
+	// 	// 	lenf[xt]++;
+	// }
+	// cout << max;
+	// cout << endl;
 
 	// char tmp[50];
 	// int i, i_f=0, n_f=0, j=0, j_f=0;
@@ -350,6 +358,17 @@ int main() {
 	// }
  //
 	// ofile.close();
+
+	const char *filename = "test.txt";
+	ifstream ifile;
+	ofstream ofile;
+
+	ifile.open(filename);
+	char line[50];
+	ifile >> line;
+	cout << line;
+
+	ifile.close();
 
 	return 0;
 }

@@ -12,6 +12,7 @@ typedef struct pnode {
 	pnode *next;
 	char all[100];
 	char name[50];
+	char date[12];
 	int points;
 } player;
 
@@ -21,7 +22,8 @@ typedef struct pnode {
 class Classifica : public State {
 	private:
 		const char *filename = "classifica.txt";
-		const char splitter = '@';
+		const char cols_d = '@';
+		const char rows_d = '\n';
 		ofstream ofile;
 		ifstream ifile;
 
@@ -32,7 +34,7 @@ class Classifica : public State {
 		List chart;
 
 		int ROW_SPACING = 2;
-		int TEXT_XOFF = 3;
+		int TEXT_XOFF = 2;
 		int TEXT_YOFF = 1;
 
 		int total_len=0;
@@ -49,9 +51,6 @@ class Classifica : public State {
 		/// Fa interagire l'utente con lo stato di giocos
 		int update(int input);
 
-		/// ???
-		player gameOverScreen(int points);
-
 		/// Fa immettere all'utente il suo nome per la classifica
 		void get_new_name(char name[]);
 
@@ -59,7 +58,7 @@ class Classifica : public State {
 		void addPlayer();
 
 		/// Inserisce un giocatore nellla lista concatenata
-		void insertPlayer(char name[], int points);
+		void insertPlayer(char name[], int points, char date[]);
 };
 
 #endif
