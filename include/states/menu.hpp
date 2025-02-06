@@ -18,6 +18,8 @@ class Menu : public State {
 		int TEXT_XOFF = 4;
 		int TEXT_YOFF = 1;
 
+		const char *borders = "||--++++";
+
 		const char CRS_CH = '>';
 		int CRS_YOFF;
 		int CRS_X;

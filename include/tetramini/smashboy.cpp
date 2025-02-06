@@ -20,8 +20,28 @@ void Smashboy::print_frame() {
  * @param dir positiva se a destra negativa altrimenti
  */
 void Smashboy::safe_move(int dir) {
-	if(dir > 0 && x < SCRW-WIDTH)
+	int s = side_collisions(dir);
+
+	if(!s && dir > 0 && x < SCRW-WIDTH)
 		Tetramino::move(dir);
-	if(dir < 0 && x > XOFF+1)
+	if(!s && dir < 0 && x > XOFF+1)
 		Tetramino::move(dir);
+}
+
+int Smashboy::side_collisions(int side) {
+	char c;
+	int i, off, result = 0;
+
+	if(side < 0)
+		off = x-1;
+	else
+		off = x + WIDTH;
+
+	for(i=y; i<y+HEIGHT; i++) {
+		c = mvinch(i, off) & A_CHARTEXT;
+		if(c == '[' || c == ']')
+			result++;
+	}
+
+	return result!=0;
 }

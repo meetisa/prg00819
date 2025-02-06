@@ -8,12 +8,20 @@
 #include "screen.hpp"
 using namespace std;
 
+#define MAX_LEN_ALL 50
+
+#define MAX_LEN_POS 5
+#define MAX_LEN_NAME 23
+#define MAX_LEN_PNT 10
+#define MAX_LEN_DATE 12
+
 typedef struct pnode {
 	pnode *next;
-	char all[100];
-	char name[50];
-	char date[12];
+	char all[MAX_LEN_ALL];
+	char name[MAX_LEN_NAME];
+	char date[MAX_LEN_DATE];
 	int points;
+	int pos;
 } player;
 
 /**
@@ -33,12 +41,14 @@ class Classifica : public State {
 
 		List chart;
 
-		int ROW_SPACING = 2;
-		int TEXT_XOFF = 2;
-		int TEXT_YOFF = 1;
+		const int ROW_SPACING = 2;
+		const int TEXT_XOFF = 2;
+		const int TEXT_YOFF = 1;
 
-		int total_len=0;
-		int length=0;
+		const char *borders = "||--++++";
+
+		int ch_file_len=0;
+		int players_len=0;
 
 	public:
 
@@ -59,6 +69,8 @@ class Classifica : public State {
 
 		/// Inserisce un giocatore nellla lista concatenata
 		void insertPlayer(char name[], int points, char date[]);
+
+		void updateAllPlayers();
 };
 
 #endif

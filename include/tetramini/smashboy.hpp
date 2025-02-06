@@ -23,6 +23,8 @@ class Smashboy: public Tetramino {
 
 		/// Ruota il tetramino di zero gradi
 		void rotate() {}
+
+		int side_collisions(int side);
 };
 
 #endif

@@ -30,7 +30,7 @@ class Screen {
 		Screen(){};
 
 		/// Inizializza la finestra
-		void init(int w, int h, int stx, int sty, char borders[]);
+		void init(int w, int h, int stx, int sty, const char borders[]);
 
 		/// Centra la finestra nel terminale
 		void setInCenter();
@@ -47,20 +47,19 @@ class Screen {
  */
 class List : public Screen {
 	private:
-		int LENGTH;
+		int rows;
 		int ROW_SPACING;
 		int TEXT_XOFF;
 		int TEXT_YOFF;
 
-		int TOTAL_CHARS_LEN;
+		int tot_ch_len;
 
 		char *list = NULL;
-		char splitter;
 		const char cols_d = '@';
 		const char rows_d = '\n';
 
-		int NFIELDS;
-		int *maxf;
+		int fields_len;
+		int *max_field_len;
 
 	public:
 
@@ -68,7 +67,7 @@ class List : public Screen {
 		List(){};
 
 		/// Inizializza la finestra
-		void init(char text[],int r_s, int txt_xoff, int txt_yoff, char borders[]);
+		void init(char text[],int r_s, int txt_xoff, int txt_yoff, const char borders[]);
 
 		/// Aggiorna larghezza e altezza
 		void compute_sizes(int *width, int *height);

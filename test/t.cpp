@@ -358,17 +358,15 @@ int main() {
 	// }
  //
 	// ofile.close();
+	char p[5];
+	char str[50];
+	str[0] = '\0';
+	strcat(str, "stringa");
+	strcat(str, "\nnuova stringsa");
 
-	const char *filename = "test.txt";
-	ifstream ifile;
-	ofstream ofile;
-
-	ifile.open(filename);
-	char line[50];
-	ifile >> line;
-	cout << line;
-
-	ifile.close();
+	sprintf(p, "%d", 1);
+	strcat(str, p);
+	cout << str << endl;
 
 	return 0;
 }

@@ -10,7 +10,7 @@
  * @param sty l'ordinata di partenza della finestra
  * @param borders stringa di 8 caratteri che sono i bordi della finestra
  */
-void Screen::init(int w, int h, int stx, int sty, char *borders) {
+void Screen::init(int w, int h, int stx, int sty, const char borders[]) {
 	WIDTH = w;
 	HEIGHT = h;
 
@@ -23,14 +23,14 @@ void Screen::init(int w, int h, int stx, int sty, char *borders) {
 }
 
 /**
- * Per centra la finestra nel terminale
+ * Per centrare la finestra nel terminale
  */
 void Screen::setInCenter() {
 	int maxh, maxw;
 	getmaxyx(stdscr, maxh, maxw);
 
-	int middle_y = (maxh/2) - (HEIGHT/2);
-	int middle_x = (maxw/2) - (WIDTH/2);
+	int middle_y = (maxh - HEIGHT) / 2;
+	int middle_x = (maxw - WIDTH) / 2;
 
 	mvwin(win, middle_y, middle_x);
 }
@@ -60,7 +60,6 @@ void Screen::show() {
 void Screen::destroy() {
 	werase(win);
 	wrefresh(win);
-	//delwin(win);
 }
 
 /* LIST */
@@ -73,14 +72,14 @@ void Screen::destroy() {
  * @param txt_yoff quanto spazio tra i bordi orizzontali
  * @param borders stringa di 8 caratteri che sono i bordi della finestra
  */
-void List::init(char text[], int r_s, int txt_xoff, int txt_yoff, char borders[]) {
+void List::init(char text[], int r_s, int txt_xoff, int txt_yoff, const char borders[]) {
 	int w, h;
 
 	ROW_SPACING = r_s;
 	TEXT_XOFF = txt_xoff;
 	TEXT_YOFF = txt_yoff;
 
-	TOTAL_CHARS_LEN = strlen(text);
+	tot_ch_len = strlen(text);
 
 	list = text;
 
@@ -97,38 +96,27 @@ void List::init(char text[], int r_s, int txt_xoff, int txt_yoff, char borders[]
  */
 void List::compute_sizes(int *width, int *height) {
 
-	/*
-
-	 nota del futuro:
-	 una scelta più efficiente sarebbe quella di
-	 usare un parametro char *titles[] tipo
-	 {"nome", "punteggio", "data"}
-	 per potere avere già il numero di colonne e i titoli delle colonne
-
-	 */
-
-
 	int i, xt=0, len=0;
 
-	NFIELDS=1;
-	LENGTH=1;
+	fields_len=1;
+	rows=0;
 
 	for(i=0; list[i] != rows_d; i++)  {
-		NFIELDS += (list[i] == cols_d);
+		fields_len += (list[i] == cols_d);
 	}
 
-	maxf = new int[NFIELDS];
+	max_field_len = new int[fields_len];
 
-	for(i=0; i<NFIELDS; i++)
-		maxf[i] = 0;
+	for(i=0; i<fields_len; i++)
+		max_field_len[i] = 0;
 
-	for(i=0; i<TOTAL_CHARS_LEN; i++) {
+	for(i=0; i<tot_ch_len; i++) {
 		if(list[i] == rows_d || list[i] == cols_d) {
-			if(len > maxf[xt])
-				maxf[xt] = len;
+			if(len > max_field_len[xt])
+				max_field_len[xt] = len;
 
 			if(list[i] == rows_d) {
-				LENGTH++;
+				rows++;
 				len = 0;
 				xt = 0;
 			}
@@ -143,11 +131,11 @@ void List::compute_sizes(int *width, int *height) {
 	}
 
 	*width = 0;
-	for(i=0; i<NFIELDS; i++)
-		*width += maxf[i];
+	for(i=0; i<fields_len; i++)
+		*width += max_field_len[i];
 
 
-	*width += (NFIELDS-1) + 2 + TEXT_XOFF*2 * NFIELDS;
+	*width += (fields_len-1) + 2 + TEXT_XOFF*2 * fields_len;
 
 	/*
 	 * | bordo sopra (+1)
@@ -160,7 +148,7 @@ void List::compute_sizes(int *width, int *height) {
 	 * |--------------
 	 * | bordo sotto (+1)
 	 */
-	*height = (TEXT_YOFF*2) +2 +(LENGTH*ROW_SPACING)-(ROW_SPACING-1);
+	*height = (TEXT_YOFF*2) +2 +(rows*ROW_SPACING)-(ROW_SPACING-1);
 }
 
 /**
@@ -170,8 +158,8 @@ void List::compute_sizes(int *width, int *height) {
 void List::update_list(char new_text[]) {
 	int w, h;
 
-	TOTAL_CHARS_LEN = strlen(new_text);
-	list = new char[TOTAL_CHARS_LEN];
+	tot_ch_len = strlen(new_text);
+	list = new char[tot_ch_len];
 	list = new_text;
 
 	compute_sizes(&w, &h);
@@ -187,7 +175,7 @@ void List::show_list() {
 	int ch_x = 1;
 	int y=TEXT_YOFF+1, x=TEXT_XOFF;
 
-	for(i=0; i<TOTAL_CHARS_LEN; i++) {
+	for(i=0; i<tot_ch_len; i++) {
 		if(list[i] == rows_d) {
 			y += ROW_SPACING;
 			x = TEXT_XOFF;
@@ -195,7 +183,7 @@ void List::show_list() {
 			xt = 0;
 		}
 		else if(list[i] == cols_d) {
-			x += 1+TEXT_XOFF*2 + maxf[xt];
+			x += 1+TEXT_XOFF*2 + max_field_len[xt];
 			mvwprintw(win, y, x-TEXT_XOFF, "|");
 			ch_x = 1;
 			xt++;
@@ -212,5 +200,5 @@ void List::show_list() {
  * @returns la lunghezza della lista
  */
 int List::get_len() {
-	return LENGTH;
+	return rows;
 }

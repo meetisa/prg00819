@@ -32,7 +32,7 @@ class Hero: public Tetramino {
 		void rotate();
 
 		/// Controlla che non ci siano ostacoli ai lati
-		int side_collisions();
+		int side_collisions(int side);
 };
 
 #endif

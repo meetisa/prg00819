@@ -18,7 +18,7 @@ void Hero::print_frame() {
  * @param dir positiva se a destra negativa altrimenti
  */
 void Hero::safe_move(int dir) {
-	if(!side_collisions()) {
+	if(!side_collisions(dir)) {
 		int l_limit = (dir<0) * (XOFF - (current * 2) + 1);
 		int r_limit = ((dir<0)*SCRW) + XOFF + SCRW + (current * 4) - WIDTH - 1;
 
@@ -49,21 +49,34 @@ void Hero::rotate() {
 /**
  * Controllo se ci sono ostacoli ai lati del tetramino
  */
-int Hero::side_collisions() {
-	int coll = 0;
+int Hero::side_collisions(int side) {
+	char c;
+	int i, off, result = 0;
+
+	if(current && side < 0)
+		off = x + 1;
+	if(current && side > 0)
+		off = x + 4;
+
+	if(!current && side < 0)
+		off = x - 1;
+	if(!current && side > 0)
+		off = x + WIDTH;
+
 	if(current) {
-		for(int i=y; i<y+WIDTH; i++) {
-			char c = mvinch(i, x+4) & A_CHARTEXT;
-			if(c == '[') {
-				coll = 1;
+		for(i=y; i<y+HEIGHT; i++) {
+			c = mvinch(i, off) & A_CHARTEXT;
+			if(c == '[' || c == ']') {
+				result = 1;
 				break;
 			}
 		}
 	}
 	else {
-		char c = mvinch(y+HEIGHT-1, x+WIDTH) & A_CHARTEXT;
-		if(c == '[')
-			coll = 1;
+		c = mvinch(y+HEIGHT-1, off) & A_CHARTEXT;
+		if(c == '[' || c == ']')
+			result = 1;
 	}
-	return coll;
+
+	return result;
 }

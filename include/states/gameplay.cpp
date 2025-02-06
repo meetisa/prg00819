@@ -122,24 +122,4 @@ void Partita::gameOver() {
 	classifica.close();
 
 	setDone(1);
-
-	// echo();
- //
-	// WINDOW *insert_name;
-	// insert_name = newwin(3, 50, 3, 4);
-	// wborder(insert_name, '|', '|', '-', '-', '+', '+', '+', '+');
- //
-	// char name[50];
- //
-	// mvwscanw(insert_name, 1, 1, "%s", name);
- //
-	// wrefresh(insert_name);
- //
-	// noecho();
- //
-	// setNext(CLASSIFICA);
- //
-	// setDone(1);
- //
-	// return name;
 }

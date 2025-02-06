@@ -8,11 +8,11 @@ Menu::Menu() : State() {
 	CRS_X = (TEXT_XOFF/2);
 
 	options.init(
-		"Nuova partita\nClassifica\nEsci", // lista divisa da \n
+		"Nuova partita\nClassifica\nEsci\n", // lista divisa da \n
 		ROW_SPACING, // spazio tra le righe
 		TEXT_XOFF, // offset della x
 		TEXT_YOFF, // offset della y
-		"||--++++" // bordi della finestra
+		borders // bordi della finestra
 	);
 	options.setInCenter();
 }
